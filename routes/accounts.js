@@ -1,14 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const { signUpHandler, signUpPostHandler, verifyOTP } = require("../handlers/accounts")
+const { signUpHandler, getVerified, login, handleLogin, signUpPostHandler, verifyOTP, checkUsername } = require("../handlers/accounts")
 
 
 router.get("/signup", signUpHandler);
 
 router.post("/signup", signUpPostHandler);
 
-router.get("/auth/:username/", verifyOTP);
+router.get("/login", login);
 
-router.post("/auth/:username/", verifyOTP);
+router.post("/login", handleLogin);
+
+router.get("/auth/:username/", getVerified);
+
+router.post("/auth/", verifyOTP);
+
+router.post("/check-username/", checkUsername);
 
 module.exports = router;

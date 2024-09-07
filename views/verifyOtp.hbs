@@ -16,24 +16,18 @@
     <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
         <h2 class="text-2xl font-bold mb-4 text-center">OTP Auth</h2>
 
-        <form hx-post="{% url 'accounts:verify-otp' username %}" hx-trigger="submit" hx-target="#message-div"
-            method="POST">
-            {% csrf_token %}
-            {% for message in messages %}
-            <div>
-                <h1>{{message}}</h1>
-            </div>
-            {% endfor %}
+        <form hx-post="/accounts/auth/" hx-trigger="submit" hx-target="#message-div" method="POST">
+            <input type="hidden" name="username" value="{{ username }}" />
             <div class="mb-4">
                 <input type="text" id="otp" name="otp" placeholder="Enter your OTP" required
                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 
-            <div id="message-div">
+            <div id="message-div" class="mb-2">
 
             </div>
             <button type="submit"
-                class="w-full flex justify-center items-center bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                class="w-full flex justify-center items-center bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 Login
                 <div role="status" class="ml-2 htmx-indicator">
                     <svg aria-hidden="true"
