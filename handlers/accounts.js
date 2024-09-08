@@ -1,5 +1,5 @@
 const { UserRepository } = require('../repository/accounts')
-const { makePassword, checkPassword, tokenAuth } = require('../authentication/auth_backend')
+const { makePassword, checkPassword, tokenAuth, logout } = require('../authentication/auth_backend')
 const { SendEmail } = require('../configs/email')
 
 const user_repo = new UserRepository()
@@ -36,6 +36,11 @@ module.exports.login = async function (req, res) {
     return res.render("login")
 }
 
+
+module.exports.logout = async function (req, res) {
+    return logout(res)
+}
+
 module.exports.handleLogin = async function (req, res) {
     const { username } = req.body
     if (!(username)) {
@@ -44,13 +49,12 @@ module.exports.handleLogin = async function (req, res) {
     if (!(await user_repo.getUser(username))) {
         return res.render("error_message", { "message": `user does not exists` })
     }
-
-    const { _otp, _hash } = await makePassword()
-    const user = await user_repo.setPassword({ data: { username, email, password: _hash } });
-    const mail = new SendEmail(email, "OTP Verification", "otp_verification.html", { username: username, otp: _otp })
-    await mail.send()
-    res.set("HX-Redirect", `/accounts/auth/${username}/`)
-    return res.sendStatus(200)
+    const { _otp, _hash } = await makePassword();
+    const user = await user_repo.setPassword(username, _hash);
+    const mail = new SendEmail(user.email, "OTP Verification", "otp_verification.html", { username: username, otp: _otp });
+    await mail.send();
+    res.set("HX-Redirect", `/accounts/auth/${username}/`);
+    return res.sendStatus(200);
 }
 
 
@@ -67,11 +71,10 @@ module.exports.verifyOTP = async function (req, res) {
         return res.render("error_message", { "message": "user does not exist" })
     }
     if (!isAuthenticated) {
-        return res.render("error_message", { "message": "login failed" })
+        return res.render("error_message", { "message": "Invalid OTP" })
     }
     const token = await tokenAuth(user);
-    console.log(token);
-    res.cookie("auth_token", token, { maxAge: 900000, httpOnly: true });
+    res.cookie("auth_token", token, { maxAge: 60 * 60000, httpOnly: true });
     res.set("HX-Redirect", `/dashboard/`);
     return res.sendStatus(200);
 }

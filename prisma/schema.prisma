@@ -11,16 +11,22 @@ datasource db {
 }
 
 model user {
-  user_id  Int       @id @default(autoincrement())
-  username String    @unique
-  email    String
-  password String
-  projects project[]
+  user_id      Int       @id @default(autoincrement())
+  username     String    @unique
+  email        String
+  password     String
+  created_at   DateTime  @default(now())
+  last_updated DateTime  @default(now()) @updatedAt
+  last_login   DateTime?
+  projects     project[]
 }
 
 model project {
-  id           Int    @id @default(autoincrement())
+  id           Int      @id @default(autoincrement())
   project_name String
-  user         user   @relation(fields: [user_id], references: [user_id])
+  user         user     @relation(fields: [user_id], references: [user_id])
   user_id      Int
+  active       Boolean  @default(false)
+  created_at   DateTime @default(now())
+  last_updated DateTime @default(now()) @updatedAt
 }

@@ -16,9 +16,6 @@ const getRandomOTP = (min, max) => {
 module.exports.makePassword = async function (params) {
     let _otp = String(getRandomOTP(10000, 99999))
     const _hash = await bcrypt.hash(_otp, parseInt(SALT_ROUNDS))
-    console.log(_otp)
-    console.log(SALT_ROUNDS)
-    console.log(_hash)
     return { _otp, _hash }
 }
 
@@ -29,14 +26,26 @@ module.exports.checkPassword = async function (otp, hash) {
     return check
 }
 
+function updateUserLastLogin(user_id) {
+    const date = new Date()
+    user_repo.updateLastLogin(user_id, date)
+}
+
 
 module.exports.tokenAuth = async function (user) {
     const token = jwt.sign({
         user_id: user.user_id,
         email: user.email,
+        username: user.username
     },
         SECRET_KEY,
-        { expiresIn: "1h" }
+        { expiresIn: "5h" }
     )
+    updateUserLastLogin(user.user_id)
     return token;
+}
+
+module.exports.logout = async function (res) {
+    res.clearCookie("auth_token")
+    return res.redirect("/accounts/login/")
 }

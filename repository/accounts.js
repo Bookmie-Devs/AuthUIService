@@ -22,8 +22,27 @@ class UserRepository {
         return user
     }
 
-    async setPassword(password) {
-        const user = this.model.update()
+    async updateLastLogin(user_id, date) {
+        const user = await this.model.update({
+            where: {
+                user_id: user_id
+            },
+            data: {
+                last_login: date
+            },
+            select: userDto
+        })
+        return user
+    }
+
+    async setPassword(username, password) {
+        const user = await this.model.update({
+            data: { password: password },
+            where: {
+                username: username
+            },
+            select: authDto
+        })
         return user
     }
 

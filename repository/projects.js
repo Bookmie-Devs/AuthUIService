@@ -7,8 +7,8 @@ class ProjectRepository {
         this.model = prisma.project
     }
 
-    async createProject(data) {
-        const project = await this.model.create(data);
+    async createProject(project_name, user_id) {
+        const project = await this.model.create({ data: { project_name, user_id } });
         return project
     }
 
@@ -25,22 +25,32 @@ class ProjectRepository {
     async getProject(project_id) {
         const project = await this.model.findUnique({
             where: {
-                id: project_id
+                id: parseInt(project_id)
             },
         })
         return project
     }
 
     async deleteProject(project_id) {
-        const project = this.model.delete({
+        const project = await this.model.delete({
             where: {
-                id: project_id
+                id: parseInt(project_id)
             }
         })
-        if (project == null) {
-            return true
-        }
-        return false
+        return project
+    }
+
+
+    async changeProjectStatus(project_id, status) {
+        const project = await this.model.update({
+            where: {
+                id: parseInt(project_id)
+            },
+            data: {
+                active: status
+            }
+        })
+        return project
     }
 }
 

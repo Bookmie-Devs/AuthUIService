@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { signUpHandler, getVerified, login, handleLogin, signUpPostHandler, verifyOTP, checkUsername } = require("../handlers/accounts")
+const { signUpHandler, getVerified, login, handleLogin, signUpPostHandler, verifyOTP, checkUsername, logout } = require("../handlers/accounts");
+const { alreadyLogin } = require("../authentication/middlewares");
 
 
 router.get("/signup", signUpHandler);
@@ -8,6 +9,8 @@ router.get("/signup", signUpHandler);
 router.post("/signup", signUpPostHandler);
 
 router.get("/login", login);
+
+router.get("/logout", logout);
 
 router.post("/login", handleLogin);
 
