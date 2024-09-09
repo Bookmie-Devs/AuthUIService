@@ -22,7 +22,7 @@ module.exports.signUpPostHandler = async function (req, res) {
         console.log(await user_repo.getUser(username))
         const user = await user_repo.createUser({ data: { username, email, password: _hash } });
         const mail = new SendEmail(email, "OTP Verification", "otp_verification.html", { username: username, otp: _otp })
-        mail.send()
+        await mail.send()
         res.set("HX-Redirect", `/accounts/auth/${username}/`)
         return res.sendStatus(200)
 

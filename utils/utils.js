@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require("path");
 
 const emailTemplates = path.join(__dirname, "email_templates")
-const logs = path.join(path.join(__dirname), "_logs")
+const logs = path.join(path.dirname(path.join(__dirname)), "_logs")
 
 
 module.exports.renderWithContext = function (template, context = {}) {
@@ -20,5 +20,11 @@ module.exports.renderWithContext = function (template, context = {}) {
 }
 
 module.exports.writeLogsToFile = function (file, data) {
-    fs.writeFileSync(`${logs}/${file}`, data)
+    let context
+    if (typeof data === 'object') {
+        context = `${JSON.stringify(data)}\n`
+    } else {
+        context = String(data)
+    }
+    fs.appendFileSync(`${logs}/${file}`, context)
 }

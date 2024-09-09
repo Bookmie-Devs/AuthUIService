@@ -23,13 +23,13 @@ class SendEmail {
         }
     }
 
-    send() {
-        this.transporter.sendMail(this.mailOptions, function (err, info) {
+    async send() {
+        this.transporter.sendMail(this.mailOptions, async function (err, info) {
             if (err) {
+                await writeLogsToFile("email.log", `ERROR: ${err} Time:${new Date()}\n`)
                 console.log(err)
-            }
-            else {
-                writeLogsToFile("email.log", info)
+            } else {
+                await writeLogsToFile("email.log", info)
                 console.log("email success")
             }
         })

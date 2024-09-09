@@ -32,3 +32,10 @@ module.exports.deleteProject = async function (req, res) {
     const project = await project_repo.deleteProject(project_id);
     return res.redirect("/dashboard")
 }
+
+
+module.exports.projectSettings = async function (req, res) {
+    const project_id = req.params.project_id;
+    const project = await project_repo.getProject(project_id)
+    res.render("project_settings", { project })
+}
