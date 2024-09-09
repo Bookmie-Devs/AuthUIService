@@ -21,11 +21,30 @@ model user {
   projects     project[]
 }
 
+model login_form {
+  id      Int       @id @default(autoincrement())
+  project project[]
+}
+
+model signup_form {
+  id      Int       @id @default(autoincrement())
+  project project[]
+}
+
 model project {
-  id           Int      @id @default(autoincrement())
+  id           Int    @id @default(autoincrement())
   project_name String
-  user         user     @relation(fields: [user_id], references: [user_id])
+  user         user   @relation(fields: [user_id], references: [user_id])
   user_id      Int
+
+  signup_form     signup_form @relation(fields: [signup_form_id], references: [id])
+  signup_form_id  Int
+  signup_callback String
+
+  login_form     login_form @relation(fields: [login_form_id], references: [id])
+  login_form_id  Int
+  login_callback String
+
   active       Boolean  @default(false)
   created_at   DateTime @default(now())
   last_updated DateTime @default(now()) @updatedAt
