@@ -1,0 +1,92 @@
+<div class="min-h-full">
+    <header class="bg-slate-100 shadow-md">
+        <div class="flex justify-between max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{project.project_name}} Settings</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="p-4">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <form action="/projects/update-settings/" method="post" class="space-y-6">
+                    <!-- Callback URL Section -->
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-4">Login Callback URL</h2>
+                        <label for="callback-url" class="block text-sm font-medium text-gray-700">Callback URL</label>
+                        <input type="url" id="callback-url" name="callback_url"
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="https://example.com/callback" required />
+                    </div>
+
+
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-4">Signup Callback URL</h2>
+                        <label for="callback-url" class="block text-sm font-medium text-gray-700">Callback URL</label>
+                        <input type="url" id="callback-url" name="callback_url"
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="https://example.com/callback" required />
+                    </div>
+
+
+                    <!-- Other Settings Section -->
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-4">Additional Settings</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="setting-1" class="block text-sm font-medium text-gray-700">Setting 1</label>
+                                <input type="text" id="setting-1" name="setting_1"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="Enter setting 1" />
+                            </div>
+                            <div>
+                                <label for="setting-2" class="block text-sm font-medium text-gray-700">Setting 2</label>
+                                <input type="text" id="setting-2" name="setting_2"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="Enter setting 2" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="flex justify-end">
+                        <button type="submit"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                            Save Settings
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const carousel = document.getElementById('carousel');
+            let scrollAmount = 0;
+            const scrollStep = 200;
+
+            function updateButtons() {
+                const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+                prevBtn.disabled = scrollAmount <= 0;
+                nextBtn.disabled = scrollAmount >= maxScrollLeft;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                scrollAmount = Math.max(scrollAmount - scrollStep, 0);
+                carousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+                updateButtons();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                scrollAmount = Math.min(scrollAmount + scrollStep, carousel.scrollWidth - carousel.clientWidth);
+                carousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+                updateButtons();
+            });
+
+            // Initial button state
+            updateButtons();
+        });
+    </script>
+</div>
