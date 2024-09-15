@@ -1,0 +1,11 @@
+model login_form {
+    id      Int       @id @default(autoincrement())
+    file    String?   @unique
+    project project[]
+}
+
+model signup_form {
+    id      Int       @id @default(autoincrement())
+    file    String?   @unique
+    project project[]
+}

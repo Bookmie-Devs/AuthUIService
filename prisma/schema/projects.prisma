@@ -1,0 +1,38 @@
+model project {
+    id           Int    @id @default(autoincrement())
+    project_name String
+    user         user   @relation(fields: [user_id], references: [user_id])
+    user_id      Int
+
+    signup_form     signup_form? @relation(fields: [signup_form_id], references: [id])
+    signup_form_id  Int?         @unique
+    signup_callback String?
+
+    login_form     login_form? @relation(fields: [login_form_id], references: [id])
+    login_form_id  Int?        @unique
+    login_callback String?
+
+    active       Boolean       @default(false)
+    created_at   DateTime      @default(now())
+    last_updated DateTime      @default(now()) @updatedAt
+    login_data   login_data[]
+    signup_data  signup_data[]
+}
+
+// logs
+model login_data {
+    id           Int       @id @default(autoincrement())
+    email        String?   @unique
+    project      project   @relation(fields: [project_id], references: [id])
+    date_created DateTime?
+    project_id   Int
+}
+
+model signup_data {
+    id           Int       @id @default(autoincrement())
+    email        String?   @unique
+    otp_sent     String?   @default("")
+    project      project   @relation(fields: [project_id], references: [id])
+    date_created DateTime?
+    project_id   Int
+}
