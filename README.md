@@ -18,13 +18,15 @@ npm run dev
 
 # Running the program locally
 
-````bash
+```bash
 npm start | npm run dev
+```
 
 # 28 directories, 67 files
 
 # Project Structure
-```plaintext
+
+````plaintext
 .
 ├── apis
 │   ├── handlers
@@ -42,7 +44,8 @@ npm start | npm run dev
 │   └── middlewares.js
 ├── bin```
 
-```
+````
+
 │   └── www
 ├── configs
 │   ├── email.js
@@ -58,7 +61,7 @@ npm start | npm run dev
 │   ├── forms.js
 │   └── projects.js
 ├── index.log
-├── _logs
+├── \_logs
 │   └── email.log
 ├── main.js
 ├── package.json
@@ -76,11 +79,11 @@ npm start | npm run dev
 │   │   │   └── migration.sql
 │   │   └── migration_lock.toml
 │   └── schema
-│       ├── accounts.prisma
-│       ├── dev.db
-│       ├── forms.prisma
-│       ├── projects.prisma
-│       └── schema.prisma
+│   ├── accounts.prisma
+│   ├── dev.db
+│   ├── forms.prisma
+│   ├── projects.prisma
+│   └── schema.prisma
 ├── public
 │   ├── images
 │   │   ├── index_bg2.png
@@ -91,7 +94,7 @@ npm start | npm run dev
 │   │   ├── dashboard.js
 │   │   └── index.js
 │   └── stylesheets
-│       └── style.css
+│   └── style.css
 ├── README.md
 ├── repository
 │   ├── accounts.js
@@ -108,20 +111,21 @@ npm start | npm run dev
 │   │   └── otp_verification.html
 │   └── utils.js
 └── views
-    ├── dashboard.hbs
-    ├── error.hbs
-    ├── error_message.hbs
-    ├── index.hbs
-    ├── info_message.hbs
-    ├── key.hbs
-    ├── layout.hbs
-    ├── login_forms.hbs
-    ├── login.hbs
-    ├── project_settings.hbs
-    ├── signup_forms.hbs
-    ├── signup.hbs
-    ├── user_settings.hbs
-    └── verifyOtp.hbs
+├── dashboard.hbs
+├── error.hbs
+├── error_message.hbs
+├── index.hbs
+├── info_message.hbs
+├── key.hbs
+├── layout.hbs
+├── login_forms.hbs
+├── login.hbs
+├── project_settings.hbs
+├── signup_forms.hbs
+├── signup.hbs
+├── user_settings.hbs
+└── verifyOtp.hbs
+
 ```
 
-````
+```
