@@ -26,7 +26,7 @@ npm start | npm run dev
 
 # Project Structure
 
-````plaintext
+```plaintext
 .
 ├── apis
 │   ├── handlers
@@ -42,10 +42,7 @@ npm start | npm run dev
 ├── authentication
 │   ├── auth_backend.js
 │   └── middlewares.js
-├── bin```
-
-````
-
+├── bin
 │   └── www
 ├── configs
 │   ├── email.js
@@ -125,7 +122,5 @@ npm start | npm run dev
 ├── signup.hbs
 ├── user_settings.hbs
 └── verifyOtp.hbs
-
-```
 
 ```
