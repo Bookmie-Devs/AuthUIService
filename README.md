@@ -18,8 +18,6 @@ npm run dev
 
 # Running the program locally
 
-/manage.py runserver | python manage.py runserver
-
 ````bash
 npm start | npm run dev
 
