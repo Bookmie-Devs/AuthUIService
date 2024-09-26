@@ -1,0 +1,10 @@
+{
+  "tasks": {
+    "demo_dev": "deno run --watch main.ts",
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1"
+  }
+}

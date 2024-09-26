@@ -89,3 +89,75 @@ class ProjectRepository {
 }
 
 module.exports.ProjectRepository = ProjectRepository;
+
+class EmailVerificationRepository {
+  constructor() {
+    this.model = prisma.email_verification_codes;
+  }
+
+  async createEmailCode(email, code) {
+    const ecode = await this.model.create({
+      data: {
+        email: email,
+        code: code,
+      },
+    });
+    return ecode;
+  }
+
+  async getEmailCode(email) {
+    try {
+      const emailCode = await this.model.findUnique({
+        where: {
+          email: email,
+        },
+      });
+      return emailCode;
+    } catch (error) {
+      return null;
+    }
+  }
+}
+
+module.exports.EmailVerificationRepository = EmailVerificationRepository;
+
+class ProjectUserRepository {
+  constructor(parameters) {
+    this.model = prisma.project_user;
+  }
+
+  async getUser(email) {
+    const user = await this.model.findFirst({ where: { email: email } });
+    return user;
+  }
+
+  async insertData(project_id, email, password) {
+    const data = await this.model.create({
+      data: { project_id: project_id, email: email, password: password },
+    });
+    return data;
+  }
+
+  async updateUserStatus(is_verified) {
+    const data = await this.model.update({
+      data: {
+        is_verified: is_verified,
+      },
+    });
+    return data;
+  }
+}
+
+module.exports.ProjectUserRepository = ProjectUserRepository;
+
+class LoginFormDataRepository {
+  constructor(parameters) {
+    this.model = prisma.login_data;
+  }
+
+  async insertFormData() {
+    const data = await this.model.create({});
+  }
+}
+
+module.exports.LoginFormDataRepository = LoginFormDataRepository;

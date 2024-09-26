@@ -33,3 +33,8 @@ module.exports.generateApiKey = function () {
   const key = uuid4();
   return key;
 };
+
+module.exports.extractUsername = function (email) {
+  const username = String(email).split("@")[0];
+  return username;
+};

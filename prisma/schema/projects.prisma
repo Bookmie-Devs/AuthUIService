@@ -12,26 +12,42 @@ model project {
     login_form_id  Int?        @unique
     login_callback String?
 
-    active       Boolean       @default(false)
-    created_at   DateTime      @default(now())
-    last_updated DateTime      @default(now()) @updatedAt
-    login_data   login_data[]
-    signup_data  signup_data[]
+    active        Boolean        @default(false)
+    created_at    DateTime       @default(now())
+    last_updated  DateTime       @default(now()) @updatedAt
+    login_data    login_data[]
+    project_users project_user[]
+}
+
+model email_verification_codes {
+    email String  @id @unique
+    code  String?
+}
+
+model project_user {
+    id               Int                @id @default(autoincrement())
+    email            String?            @unique
+    password         String?
+    username         String?
+    project          project            @relation(fields: [project_id], references: [id])
+    project_id       Int
+    is_verified      Boolean            @default(false)
+    date_created     DateTime           @default(now())
+    onetime_password onetime_password[]
+}
+
+// if a user of this particular project decide to use OTP
+model onetime_password {
+    id              Int          @id @default(autoincrement())
+    user            project_user @relation(fields: [project_user_id], references: [id])
+    project_user_id Int          @unique
+    otp             String?
 }
 
 // logs
 model login_data {
     id           Int       @id @default(autoincrement())
     email        String?   @unique
-    project      project   @relation(fields: [project_id], references: [id])
-    date_created DateTime?
-    project_id   Int
-}
-
-model signup_data {
-    id           Int       @id @default(autoincrement())
-    email        String?   @unique
-    otp_sent     String?   @default("")
     project      project   @relation(fields: [project_id], references: [id])
     date_created DateTime?
     project_id   Int
