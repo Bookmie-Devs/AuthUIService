@@ -5,6 +5,7 @@ const {
   tokenAuth,
   logout,
 } = require("../authentication/auth_backend");
+const crypto = require("crypto");
 const { SendEmail } = require("../configs/email");
 const { generateApiKey } = require("../utils/utils");
 
@@ -124,6 +125,9 @@ module.exports.getApiKey = async function (req, res) {
   const username = req.user.username;
   console.log(username);
   const user = await user_repo.getUser(username);
+
+  const { p, pu } = crypto.generateKeyPairSync("rsa");
+
   let key = generateApiKey();
   user_key = await api_key.getKey(userId);
   if (user_key) {

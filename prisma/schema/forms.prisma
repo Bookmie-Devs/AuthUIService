@@ -1,11 +1,17 @@
 model login_form {
-    id      Int       @id @default(autoincrement())
-    file    String?   @unique
-    project project[]
+    id            Int       @id @default(autoincrement())
+    title         String?
+    description   String?
+    file_content  String?
+    preview_image String?
+    project       project[]
 }
 
 model signup_form {
-    id      Int       @id @default(autoincrement())
-    file    String?   @unique
-    project project[]
+    id            Int       @id @default(autoincrement())
+    title         String?
+    description   String?
+    file_content  String?
+    preview_image String?
+    project       project[]
 }

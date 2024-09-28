@@ -34,6 +34,23 @@ module.exports.generateApiKey = function () {
   return key;
 };
 
+module.exports.generatePublicPrivateKeys = function (params) {
+  const { publicKey, privateKey } = crypto.generateKeyPairSync("rsa", {
+    modulusLength: 1000,
+    publicKeyEncoding: {
+      type: "spki",
+      format: "pem",
+    },
+    privateKeyEncoding: {
+      type: "pkcs8",
+      format: "pem",
+      cipher: "aes-256-cbc",
+      passphrase: "top secret",
+    },
+  });
+  return { publicKey, privateKey };
+};
+
 module.exports.extractUsername = function (email) {
   const username = String(email).split("@")[0];
   return username;

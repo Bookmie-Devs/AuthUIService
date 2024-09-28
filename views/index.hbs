@@ -1,13 +1,15 @@
-<div class="bg-gradient-to-r from-slate-100 to-slate-400">
-    <nav class="bg-white p-4 shadow-md">
+<div class="bg-slate-800">
+    <nav class="bg-slate-800 p-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
-            <div class="text-gray-600 text-lg font-bold">
+            <div class="text-white text-2xl font-bold">
                 {{!-- <img class="w-14 h-9" src="/images/logo.webp" /> --}}
                 Auth Ui Service
             </div>
-            <div class="hidden md:flex space-x-4">
-                <a href="/accounts/signup/" class="text-gray-600 text-lg nav-item hover:text-gray-900">Register</a>
-                <a href="/accounts/login/" class="text-gray-600 text-lg  nav-item hover:text-gray-900">Login</a>
+            <div class="hidden md:flex space-x-4  items-center">
+                <a href="/accounts/signup/"
+                    class="text-white text-lg bg-blue-700 rounded-md px-3 py-2 nav-item hover:bg-blue-500">Register</a>
+                <a href="/accounts/login/"
+                    class="text-white text-lg outline rounded-md text-center px-3 py-2 outline-1  nav-item hover:outline-2">Login</a>
             </div>
             <div class="md:hidden flex items-center">
                 <button id="menu-button" class="text-gray-700 focus:outline-none">
@@ -20,32 +22,44 @@
             </div>
         </div>
         <div id="menu" class="md:hidden mt-2 hidden">
-            <a href="/accounts/signup/" class="block text-gray-600 px-4 py-2 hover:bg-gray-200">Register</a>
-            <a href="/accounts/login/" class="block text-gray-600 px-4 py-2 hover:bg-gray-200">Login</a>
+            <a href="/accounts/signup/" class="block text-white px-4 py-2 hover:bg-gray-200">Register</a>
+            <a href="/accounts/login/" class="block text-white px-4 py-2 hover:bg-gray-200">Login</a>
         </div>
     </nav>
     <div class="p-20">
         <div class="flex justify-between">
             <div>
-                <div class="text-5xl font-bold text-blue-700">
+                <div class="text-5xl font-bold text-white">
                     AuthUiService Provider
                 </div>
-                <p class="text-2xl text-gray-600 mb-6">Get your authentication set up within seconds</p>
+                <p class="text-2xl text-white mb-6">Get your authentication set up within seconds</p>
                 <a type="button" href="/accounts/signup"
                     class="py-2.5 px-5 me-2 mb-2 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                     Get Started on AuthUI
                 </a>
+
+                <a type="button" href="/forms/add-form"
+                    class="py-2.5 px-5 me-2 mb-2 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                    Form Contributions
+                </a>
+                {{!-- <p class="pt-4 text-white">
+                    AuthUi is Saas project that allowd developers to set up
+                    login and signup logic within seconds with
+                    built in ready to go forms that you can select.
+                </p> --}}
             </div>
             <div>
                 <div
                     class="max-w-sm md:block bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <div class="p-5">
                         <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
-                                technology acquisitions 2021</h5>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                Authentication
+                                made simple with built in forms</h5>
                         </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise
-                            technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Simple to use, register, create a
+                            project
+                            choose your login and signup forms or upload your own and will handle the rest.</p>
                         <a href="/dashboard"
                             class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Dashboard
@@ -60,6 +74,75 @@
             </div>
         </div>
     </div>
+
+    <div class="bg-slate-800 flex p-10 flex-row justify-center space-x-20 items-center">
+        <div
+            class="outline flex flex-col hover:outline-4 justify-center items-center py-7 outline-blue-700 text-white px-7 rounded-md">
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 12 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10.335 6.514 6.91 1.464a1.122 1.122 0 0 0-1.818 0l-3.426 5.05a.988.988 0 0 0 .91 1.511h6.851a.988.988 0 0 0 .91-1.511Zm-8.67 6.972 3.426 5.05a1.121 1.121 0 0 0 1.818 0l3.426-5.05a.988.988 0 0 0-.909-1.511H2.574a.987.987 0 0 0-.909 1.511Z" />
+            </svg>
+            <div class="text-center">
+                <p>2000+</p>
+                <p>Developers</p>
+            </div>
+        </div>
+
+        <div
+            class="outline flex flex-col hover:outline-4 justify-center items-center py-7 outline-blue-700 text-white px-7 rounded-md">
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 12 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10.335 6.514 6.91 1.464a1.122 1.122 0 0 0-1.818 0l-3.426 5.05a.988.988 0 0 0 .91 1.511h6.851a.988.988 0 0 0 .91-1.511Zm-8.67 6.972 3.426 5.05a1.121 1.121 0 0 0 1.818 0l3.426-5.05a.988.988 0 0 0-.909-1.511H2.574a.987.987 0 0 0-.909 1.511Z" />
+            </svg>
+            <div class="text-center">
+                <p>2000+</p>
+                <p>Signup Forms</p>
+            </div>
+        </div>
+
+        <div
+            class="outline flex flex-col hover:outline-4 justify-center items-center py-7 outline-blue-700 text-white px-7 rounded-md">
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 12 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10.335 6.514 6.91 1.464a1.122 1.122 0 0 0-1.818 0l-3.426 5.05a.988.988 0 0 0 .91 1.511h6.851a.988.988 0 0 0 .91-1.511Zm-8.67 6.972 3.426 5.05a1.121 1.121 0 0 0 1.818 0l3.426-5.05a.988.988 0 0 0-.909-1.511H2.574a.987.987 0 0 0-.909 1.511Z" />
+            </svg>
+            <div class="text-center">
+                <p>2000+</p>
+                <p>Login Forms</p>
+            </div>
+        </div>
+
+
+        <div
+            class="outline flex flex-col hover:outline-4 justify-center items-center py-7 outline-blue-700 text-white px-7 rounded-md">
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 12 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10.335 6.514 6.91 1.464a1.122 1.122 0 0 0-1.818 0l-3.426 5.05a.988.988 0 0 0 .91 1.511h6.851a.988.988 0 0 0 .91-1.511Zm-8.67 6.972 3.426 5.05a1.121 1.121 0 0 0 1.818 0l3.426-5.05a.988.988 0 0 0-.909-1.511H2.574a.987.987 0 0 0-.909 1.511Z" />
+            </svg>
+            <div class="text-center">
+                <p>2000+</p>
+                <p>Requests</p>
+            </div>
+        </div>
+
+        <div
+            class="outline flex flex-col hover:outline-4 justify-center items-center py-7 outline-blue-700 text-white px-7 rounded-md">
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 18 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 4H1m3 4H1m3 4H1m3 4H1m6.071.286a3.429 3.429 0 1 1 6.858 0M4 1h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm9 6.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />
+            </svg>
+            <div class="text-center">
+                <p>2000+</p>
+                {{!-- <p>Tap Users</p> --}}
+            </div>
+        </div>
+    </div>
+
     <div class="bg-slate-100 flex p-10 flex-col space-y-4 items-center">
         <p class="text-gray-700 text-lg">Contribute to our open source project and help grow the platform</p>
         <a href="https://github.com/ethan-korl/authuiservice" type="button"
@@ -67,28 +150,6 @@
             Contibute on Github
         </a>
     </div>
-
-
-    <footer class="bg-white  shadow dark:bg-gray-900">
-        <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-            <div class="sm:flex sm:items-center sm:justify-between">
-                <a href="/" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-                    <span
-                        class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">AuthUiService</span>
-                </a>
-                <ul
-                    class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
-                    <li>
-                        <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
-                    </li>
-                </ul>
-            </div>
-            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="/"
-                    class="hover:underline">AuthUi™</a>. All Rights Reserved.</span>
-        </div>
-    </footer>
 
 
 </div>

@@ -11,15 +11,45 @@ cd AuthUiService
 npm run dev
 ```
 
-<!-- # Testing
-```bash
-./manage.py test | python manage.py test
-``` -->
-
 # Running the program locally
 
 ```bash
 npm start | npm run dev
+```
+
+# Running it as a simple linux service
+
+```plaintext
+[Unit]
+Description=AuthUi Service
+After=network.target
+
+[Service]
+WorkingDirectory=/path/to/project/dir
+ExecStart=/bin/node start /path/to/project/dir
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
+```
+
+# copy to serice etc
+
+```bash
+sudo cp authUiSerive.service /etc/systemd/system/
+```
+
+# reload demmon
+
+```bash
+sudo systemctl daemon-reload
+```
+
+# start service
+
+```bash
+sudo systemctl start authUiSerive
 ```
 
 # 28 directories, 67 files
@@ -28,16 +58,6 @@ npm start | npm run dev
 
 ```plaintext
 .
-├── apis
-│   ├── handlers
-│   │   ├── loginRequets.js
-│   │   └── signupRequests.js
-│   ├── logs
-│   ├── routes
-│   │   └── apiRoutes.js
-│   └── utils
-│       ├── api_auth.js
-│       └── utils.js
 ├── app.js
 ├── authentication
 │   ├── auth_backend.js
@@ -47,20 +67,37 @@ npm start | npm run dev
 ├── configs
 │   ├── email.js
 │   └── env.js
+├── deno.json
+├── Dockerfile
 ├── dtos
 │   ├── accounts.js
 │   ├── forms.js
 │   └── projects.js
+├── engine
+│   ├── apis
+│   │   ├── api_schema
+│   │   │   └── schema.js
+│   │   ├── handlers
+│   │   │   ├── loginRequests.js
+│   │   │   └── signupRequests.js
+│   │   ├── middlewares
+│   │   │   └── middlewares.js
+│   │   └── routes
+│   │       └── apiRoutes.js
+│   ├── logs
+│   └── utils
+│       ├── api_auth.js
+│       └── utils.js
+├── forms
 ├── handlers
 │   ├── accounts.js
 │   ├── admin.js
 │   ├── dashboard.js
 │   ├── forms.js
 │   └── projects.js
-├── index.log
-├── \_logs
-│   └── email.log
-├── main.js
+├── _logs
+│   ├── email.log
+│   └── log.bash
 ├── package.json
 ├── package-lock.json
 ├── prisma
@@ -74,13 +111,27 @@ npm start | npm run dev
 │   │   │   └── migration.sql
 │   │   ├── 20240914233116_changes
 │   │   │   └── migration.sql
+│   │   ├── 20240920131214_emai_verification_table
+│   │   │   └── migration.sql
+│   │   ├── 20240920131817_emai_verification_table
+│   │   │   └── migration.sql
+│   │   ├── 20240920135827_project_users
+│   │   │   └── migration.sql
+│   │   ├── 20240920142933_project_users
+│   │   │   └── migration.sql
+│   │   ├── 20240920143201_project_users
+│   │   │   └── migration.sql
+│   │   ├── 20240920144133_project_users
+│   │   │   └── migration.sql
+│   │   ├── 20240920170707_project_users
+│   │   │   └── migration.sql
 │   │   └── migration_lock.toml
 │   └── schema
-│   ├── accounts.prisma
-│   ├── dev.db
-│   ├── forms.prisma
-│   ├── projects.prisma
-│   └── schema.prisma
+│       ├── accounts.prisma
+│       ├── dev.db
+│       ├── forms.prisma
+│       ├── projects.prisma
+│       └── schema.prisma
 ├── public
 │   ├── images
 │   │   ├── index_bg2.png
@@ -91,7 +142,7 @@ npm start | npm run dev
 │   │   ├── dashboard.js
 │   │   └── index.js
 │   └── stylesheets
-│   └── style.css
+│       └── style.css
 ├── README.md
 ├── repository
 │   ├── accounts.js
@@ -100,27 +151,31 @@ npm start | npm run dev
 ├── routes
 │   ├── accounts.js
 │   ├── dashboard.js
+│   ├── forms.js
 │   ├── index.js
 │   └── projects.js
 ├── tailwind.config.js
+├── uploads
 ├── utils
 │   ├── email_templates
 │   │   └── otp_verification.html
 │   └── utils.js
 └── views
-├── dashboard.hbs
-├── error.hbs
-├── error_message.hbs
-├── index.hbs
-├── info_message.hbs
-├── key.hbs
-├── layout.hbs
-├── login_forms.hbs
-├── login.hbs
-├── project_settings.hbs
-├── signup_forms.hbs
-├── signup.hbs
-├── user_settings.hbs
-└── verifyOtp.hbs
+    ├── add_forms.hbs
+    ├── dashboard.hbs
+    ├── error.hbs
+    ├── error_message.hbs
+    ├── index.hbs
+    ├── info_message.hbs
+    ├── key.hbs
+    ├── layout.hbs
+    ├── login_forms.hbs
+    ├── login.hbs
+    ├── project_settings.hbs
+    ├── signup_forms.hbs
+    ├── signup.hbs
+    ├── user_settings.hbs
+    └── verifyOtp.hbs
 
+40 directories, 79 files
 ```

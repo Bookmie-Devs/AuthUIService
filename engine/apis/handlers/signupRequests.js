@@ -16,7 +16,7 @@ module.exports.signUpApi = async function (req, res) {
   console.log(project_id);
   const { email, password } = req.body;
   const { err, value } = schema.validate(req.body);
-  console.log("working ");
+  console.log("working");
 
   if (err) {
     return res.send(err.details.message);

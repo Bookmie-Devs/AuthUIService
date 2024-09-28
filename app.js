@@ -9,6 +9,7 @@ const accountsRouter = require("./routes/accounts");
 const dashboardRouter = require("./routes/dashboard");
 const projectRouter = require("./routes/projects");
 const apis = require("./engine/apis/routes/apiRoutes");
+const formRouter = require("./routes/forms");
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use("/accounts", accountsRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/projects", projectRouter);
 app.use("/api", apis);
+app.use("/forms", formRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
