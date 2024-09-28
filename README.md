@@ -52,6 +52,17 @@ sudo systemctl daemon-reload
 sudo systemctl start authUiSerive
 ```
 
+# Runnig docker image
+
+```bash
+docker run bhigethan/authui_service -p 3000:3000 \
+-e DATABASE_URL="file:./dev.db" \
+-e SALT_ROUNDS= \
+-e EMAIL_HOST_USER = ""
+-e EMAIL_HOST_PASSWORD = ""
+-e SECRET_KEY = ""
+```
+
 # 28 directories, 67 files
 
 # Project Structure

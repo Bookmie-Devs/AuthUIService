@@ -1,0 +1,9 @@
+services:
+  authui_server:
+    # build:
+    #   context: .
+    image: bhigethan/authui_service
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
