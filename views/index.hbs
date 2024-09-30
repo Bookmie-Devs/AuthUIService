@@ -1,8 +1,9 @@
 <div class="bg-slate-800">
     <nav class="bg-slate-800 p-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
-            <div class="text-white text-2xl font-bold">
+            <div class="text-white flex space-x-1 text-2xl font-bold">
                 {{!-- <img class="w-14 h-9" src="/images/logo.webp" /> --}}
+                <img src="/images/logo.svg" class="h-8" alt="Authui Logo" />
                 Auth Ui Service
             </div>
             <div class="hidden md:flex space-x-4  items-center">
@@ -39,8 +40,14 @@
                 </a>
 
                 <a type="button" href="/forms/add-form"
+                    class="py-2.5 flex justify-center w-full px-5 text-center me-2 mb-2 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                    Form Contributions <p class="ml-2 outline-1 outline outline-red-300 rounded-md px-1  text-red-300">
+                        Beta</p>
+                </a>
+
+                <a type="button" href="/docs"
                     class="py-2.5 w-full px-5 text-center me-2 mb-2 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                    Form Contributions
+                    Documentation
                 </a>
                 {{!-- <p class="pt-4 text-white">
                     AuthUi is Saas project that allowd developers to set up
@@ -84,7 +91,7 @@
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M10.335 6.514 6.91 1.464a1.122 1.122 0 0 0-1.818 0l-3.426 5.05a.988.988 0 0 0 .91 1.511h6.851a.988.988 0 0 0 .91-1.511Zm-8.67 6.972 3.426 5.05a1.121 1.121 0 0 0 1.818 0l3.426-5.05a.988.988 0 0 0-.909-1.511H2.574a.987.987 0 0 0-.909 1.511Z" />
             </svg>
-            <div class="text-center">
+            <div class="text-center text-lg">
                 <p>2000+</p>
                 <p>Developers</p>
             </div>
@@ -97,7 +104,7 @@
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M10.335 6.514 6.91 1.464a1.122 1.122 0 0 0-1.818 0l-3.426 5.05a.988.988 0 0 0 .91 1.511h6.851a.988.988 0 0 0 .91-1.511Zm-8.67 6.972 3.426 5.05a1.121 1.121 0 0 0 1.818 0l3.426-5.05a.988.988 0 0 0-.909-1.511H2.574a.987.987 0 0 0-.909 1.511Z" />
             </svg>
-            <div class="text-center">
+            <div class="text-center text-lg">
                 <p>2000+</p>
                 <p>Signup Forms</p>
             </div>
@@ -110,7 +117,7 @@
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M10.335 6.514 6.91 1.464a1.122 1.122 0 0 0-1.818 0l-3.426 5.05a.988.988 0 0 0 .91 1.511h6.851a.988.988 0 0 0 .91-1.511Zm-8.67 6.972 3.426 5.05a1.121 1.121 0 0 0 1.818 0l3.426-5.05a.988.988 0 0 0-.909-1.511H2.574a.987.987 0 0 0-.909 1.511Z" />
             </svg>
-            <div class="text-center">
+            <div class="text-center text-lg">
                 <p>2000+</p>
                 <p>Login Forms</p>
             </div>
@@ -124,7 +131,7 @@
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M4 4H1m3 4H1m3 4H1m3 4H1m6.071.286a3.429 3.429 0 1 1 6.858 0M4 1h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm9 6.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />
             </svg>
-            <div class="text-center">
+            <div class="text-center text-lg">
                 <p>2000+</p>
                 <p>Tap Users</p>
             </div>
@@ -159,8 +166,9 @@
         <div>
             <img src="images/learning.svg" />
         </div>
-
     </div>
+
+
     <div class="bg-slate-100 flex p-10 flex-col space-y-4 items-center">
         <p class="text-gray-700 text-lg">Contribute to our open source project and help grow the platform</p>
         <a href="https://github.com/ethan-korl/authuiservice" type="button"
@@ -168,6 +176,50 @@
             Contibute on Github
         </a>
     </div>
+
+    <div>
+        <h1 class="text-center text-2xl underline underline-offset-8 mt-4 text-white">Sponsers</h1>
+        <div
+            class="bg-slate-800 flex p-10 flex-col md:flex-row justify-center  space-y-10 md:space-y-0  md:space-x-20 items-center">
+
+
+            <div class="w-80 sm:w-1/5 h-1/3 flex flex-col justify-center items-center rounded-md">
+
+                <div class="text-center">
+                    <img src="/images/dummylogo1.webp" />
+                </div>
+            </div>
+
+
+            <div class="w-80 sm:w-1/5 h-1/3 flex flex-col justify-center items-center rounded-md">
+
+                <div class="text-center">
+                    <img src="/images/dummylogo2.jpg" />
+                </div>
+            </div>
+
+
+
+
+            <div class="w-80 sm:w-1/5 h-1/3 flex flex-col justify-center items-center rounded-md">
+
+                <div class="text-center">
+                    <img src="/images/dummylogo3.svg" />
+                </div>
+            </div>
+
+
+
+            <div class="w-80 sm:w-1/5 h-1/3 flex flex-col justify-center items-center rounded-md">
+
+                <div class="text-center">
+                    <img src="/images/dummylogo4.svg" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 
 
 </div>

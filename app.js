@@ -28,7 +28,7 @@ app.use("/", indexRouter);
 app.use("/accounts", accountsRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/projects", projectRouter);
-app.use("/api", apis);
+app.use("/client", apis);
 app.use("/forms", formRouter);
 
 // catch 404 and forward to error handler

@@ -25,11 +25,10 @@
 
                     {{#each forms}}
                     <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                        <img class="w-full h-32 object-cover" src="/images/form-preview1.jpg" alt="Form Preview 1" />
+                        <img class="w-full h-32 object-cover" src="{{ preview_image }}" alt="Form Preview 1" />
                         <form class="p-4" method="POST" action="/projects/select-project-signup-form">
-                            <h2 class="text-xl font-semibold text-gray-800">Form Title 1</h2>
-                            <p class="mt-2 text-gray-600">Brief description of Form 1. This is where you can give users
-                                an idea of what the form is about.</p>
+                            <h2 class="text-xl font-semibold text-gray-800">{{title}}</h2>
+                            <p class="mt-2 text-gray-600">{{ description }}</p>
                             <input type="hidden" name="project_id" value="{{ project_id }}" />
                             <input type="hidden" name="signup_form_id" value="{{this.id}}" />
                             <button type="submit"

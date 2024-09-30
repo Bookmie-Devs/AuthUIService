@@ -59,8 +59,9 @@
 <body class="bg-slate-800 text-white">
     <nav class="bg-slate-800 p-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="/" class="text-white text-2xl font-bold">
+            <a href="/" class="text-white flex text-2xl font-bold">
                 {{!-- <img class="w-14 h-9" src="/images/logo.webp" /> --}}
+                <img src="/images/logo.svg" class="h-8" alt="Authui Logo" />
                 Add a Form to Auth Ui
             </a>
             <div class="hidden md:flex space-x-4  items-center">
@@ -86,7 +87,7 @@
     </nav>
     <div class="min-h-full px-6">
         <div class="flex justify-between px-3 mt-3">
-            <label class="block text-gray-900 text-lg font-bold mb-2">HTML Code</label>
+            <label class="block text-gray-900 text-lg mb-2">HTML Code</label>
             <button type="button" id="switch" class="text-slate-800 outline outline-2 px-2 rounded-md text-lg">Upload
                 html
                 file</button>
@@ -99,19 +100,20 @@
                 <button type="button" id="previewButton"
                     class=" outline outline-slate-800 hover:outline-slate-600 text-slate-800 w-full mb-2 font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">Preview</button>
                 <div class="mb-4">
-                    <label class="block text-slate-800 text-sm font-bold mb-2" for="title">Form Title</label>
+                    <label class="block text-slate-800 text-lg mb-2" for="title">Form Title</label>
                     <input id="title" name="title" type="text" required
-                        class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline" />
+                        class="border rounded-md w-full py-2 px-3 text-lg text-gray-900 focus:outline-none focus:shadow-outline" />
                 </div>
                 <div class="mb-4">
-                    <label class="block text-slate-800 text-sm font-bold mb-2" for="description">Description</label>
-                    <textarea name="description" id="description" required
-                        class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    <label class="block text-slate-800 text-lg mb-2" for="description">Description</label>
+                    <input name="description" id="description" required
+                        class="border rounded-md w-full text-lg py-2 px-3 text-gray-900 focus:outline-none focus:shadow-outline" />
                 </div>
                 <div class="mb-4">
-                    <label class="block text-salte-800 text-sm font-bold mb-2" for="previewImage">Preview Image</label>
-                    <input name="preview_image" id="previewImage" type="file" required
-                        class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline" />
+                    <label class="block text-salte-800 text-lg mb-2" for="previewImage">Preview Image</label>
+                    <input
+                        class="w-full bg-slate-700 file:mr-10 file:bg-slate-800 file:border-none border-none file:rounded-l-md file:text-white appearance-none text-lg text-white file:px-3 file:py-2 file:text-lg border border-gray-300 rounded-lg cursor-pointer focus:outline-none"
+                        id="file_input" name="preview_image" type="file">
                 </div>
 
                 <div class="flex items-center justify-between">
@@ -127,24 +129,28 @@
         <div id="main-div-2" class="hidden">
             <form id="formCreator" class="bg-slate-200 rounded-lg pt-3 pb-8 mb-4">
                 <div class="mb-4">
-                    <label class="block text-slate-800 text-sm font-bold mb-2" for="title">Form Title</label>
-                    <input name="title" id="title" type="text" required
-                        class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline" />
+                    <label class="block text-slate-800 text-lg mb-2" for="title">Form Title</label>
+                    <input id="title" name="title" type="text" required
+                        class="border rounded-md w-full py-2 px-3 text-lg text-gray-900 focus:outline-none focus:shadow-outline" />
                 </div>
                 <div class="mb-4">
-                    <label class="block text-slate-800 text-sm font-bold mb-2" for="description">Description</label>
-                    <textarea title="description" id="description" required
-                        class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    <label class="block text-slate-800 text-lg mb-2" for="description">Description</label>
+                    <input name="description" id="description" required
+                        class="border rounded-md w-full text-lg py-2 px-3 text-gray-900 focus:outline-none focus:shadow-outline" />
                 </div>
-                {{!-- <div class="mb-4">
-                    <label class="block text-salte-800 text-sm font-bold mb-2" for="previewImage">Html File</label>
-                    <input name="file_content" id="previewImage" type="file" required
-                        class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline" />
-                </div> --}}
+
                 <div class="mb-4">
-                    <label class="block text-salte-800 text-sm font-bold mb-2" for="previewImage">Preview Image</label>
-                    <input name="preview_image" id="previewImage" type="file" required
-                        class="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline" />
+                    <label class="block text-salte-800 text-lg mb-2" for="previewImage">Html File</label>
+                    <input
+                        class="w-full bg-slate-700 file:mr-10 file:bg-slate-800 file:border-none border-none file:rounded-l-md file:text-white appearance-none text-lg text-white file:px-3 file:py-2 file:text-lg border border-gray-300 rounded-lg cursor-pointer focus:outline-none"
+                        id="file_content" name="file_content" type="file">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-salte-800 text-lg mb-2" for="previewImage">Preview Image</label>
+                    <input
+                        class="w-full bg-slate-700 file:mr-10 file:bg-slate-800 file:border-none border-none file:rounded-l-md file:text-white appearance-none text-lg text-white file:px-3 file:py-2 file:text-lg border border-gray-300 rounded-lg cursor-pointer focus:outline-none"
+                        id="file_input" name="preview_image" type="file">
                 </div>
 
                 <div class="flex items-center justify-between">
@@ -184,6 +190,7 @@
             const mainDiv = document.getElementById("main-div");
             const mainDiv2 = document.getElementById("main-div-2")
 
+
             document.getElementById('previewButton').onclick = function () {
                 const code = editor.getValue();
                 const title = document.getElementById('title').value;
@@ -212,20 +219,42 @@
                 }
             };
 
-            document.addEventListener('submit', function (event) {
+
+            async function readText(file) {
+                //const file = event.target.files.item(0)
+                const content = await file.text();
+                console.log(content)
+                return content
+                //document.getElementById("output").innerText = text
+            }
+
+            document.addEventListener('submit', async function (event) {
+                const fileInput = document.getElementById('file_content');
+                const file = fileInput.files[0];
+
                 async function sendForm(form) {
                     const result = await fetch("/forms/add-form/", {
                         method: "POST",
                         body: form
                     })
+                    if (result.ok) {
+                        const data = await result.json()
+                        alert(data.message)
+
+                    }
+                    else {
+                        alert("Form addition failed")
+                        return
+                    }
+
                 }
 
                 event.preventDefault();
+                const htmlContent = await readText(file)
                 const form = new FormData(event.target)
+                form.delete("file_content")
+                form.append("file_content", htmlContent)
                 sendForm(form)
-
-                console.log(form)
-                alert('Form submitted successfully!');
             });
         });
     </script>

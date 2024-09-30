@@ -55,3 +55,20 @@ module.exports.extractUsername = function (email) {
   const username = String(email).split("@")[0];
   return username;
 };
+
+module.exports.localMediaUrl = function (req, filePath) {
+  const filePathArray = String(filePath).split("/");
+  // const host = req.hostname;
+  return `/${filePathArray[1]}/${filePathArray[2]}`;
+};
+
+module.exports.cleanHtml = function (content) {
+  let cleaned = content
+    .replace(/^\s*'/, "")
+    .replace(/'\s*}\s*$/, "")
+    .replace(/' \+ /g, "")
+    .replace(/\\r\\n/g, "")
+    .replace(/\s+/g, " ");
+
+  return cleaned.trim();
+};

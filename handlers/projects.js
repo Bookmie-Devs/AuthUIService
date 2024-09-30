@@ -1,5 +1,6 @@
 const { LoginFormRepository } = require("../repository/forms");
 const { ProjectRepository } = require("../repository/projects");
+const { login } = require("./accounts");
 
 const project_repo = new ProjectRepository();
 const login_form_repo = new LoginFormRepository();
@@ -15,6 +16,7 @@ module.exports.createProject = async function (req, res) {
   if (project) {
     return res.render("error_message", {
       message: `project name already exists`,
+      layout: false,
     });
   }
   const newProject = await project_repo.createProject(
@@ -50,7 +52,10 @@ module.exports.deleteProject = async function (req, res) {
 module.exports.projectSettings = async function (req, res) {
   const project_id = req.params.project_id;
   const project = await project_repo.getProject(project_id);
-  res.render("project_settings", { project });
+  res.render("project_settings", {
+    project,
+    loginScript: `<script src="https://${req.hostname}/client/23/login/"></script>`,
+  });
 };
 
 module.exports.addLoginForm = async function (req, res) {

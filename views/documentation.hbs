@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+    <div class="bg-slate-800">
+        <nav class="bg-slate-800 p-4 shadow-md">
+            <div class="container mx-auto flex justify-between items-center">
+                <a href="/" class="text-white flex space-x-1 text-2xl font-bold">
+                    {{!-- <img class="w-14 h-9" src="/images/logo.webp" /> --}}
+                    <img src="/images/logo.svg" class="h-8" alt="Authui Logo" />
+                    Auth Ui Service
+                </a>
+                <div class="hidden md:flex space-x-4  items-center">
+                    <a href="/accounts/signup/"
+                        class="text-white text-lg bg-blue-700 rounded-md px-3 py-2 nav-item hover:bg-blue-500">Register</a>
+                    <a href="/accounts/login/"
+                        class="text-white text-lg outline rounded-md text-center px-3 py-2 outline-1  nav-item hover:outline-2">Login</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-button" class="text-gray-700 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="menu" class="md:hidden mt-2 hidden">
+                <a href="/accounts/signup/" class="block text-white px-4 py-2 hover:bg-gray-200">Register</a>
+                <a href="/accounts/login/" class="block text-white px-4 py-2 hover:bg-gray-200">Login</a>
+            </div>
+        </nav>
+        <div class="container mx-auto py-10">
+            <h1 class="text-3xl font-bold text-white mb-4">API Overview</h1>
+            <p class="text-white mb-6">This documentation provides an overview of the Auth UI Service API, including
+                endpoints, request/response formats, and examples.</p>
+
+            <h2 class="text-2xl font-bold text-white mb-4">Base URL</h2>
+            <p class="text-white mb-6">All API requests should be made to the following base URL:</p>
+            <code class="block bg-gray-900 text-white p-3 rounded-md">https://api.yourservice.com/v1</code>
+
+            <h2 class="text-2xl font-bold text-white mt-10 mb-4">Endpoints</h2>
+
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">1. User Registration</h3>
+                <p class="text-gray-700 mb-4">Register a new user with the provided credentials.</p>
+                <h4 class="font-semibold text-gray-800">Endpoint:</h4>
+                <code class="block bg-gray-200 text-gray-800 p-2 rounded-md">POST /accounts/signup</code>
+
+                <h4 class="font-semibold text-gray-800">Request Body:</h4>
+                <pre class="bg-gray-200 p-2 rounded-md">
+{
+    "username": "string",
+    "email": "string",
+    "password": "string"
+}
+                </pre>
+
+                <h4 class="font-semibold text-gray-800">Response:</h4>
+                <pre class="bg-gray-200 p-2 rounded-md">
+{
+    "message": "User registered successfully",
+    "userId": "string"
+}
+                </pre>
+
+                <h4 class="font-semibold text-gray-800">Example Code Snippet:</h4>
+                <pre class="bg-gray-200 p-2 rounded-md">
+fetch('https://api.yourservice.com/v1/accounts/signup', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        username: 'exampleUser',
+        email: 'user@example.com',
+        password: 'securePassword123'
+    })
+})
+.then(response => response.json())
+.then(data => console.log(data));
+                </pre>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">2. User Login</h3>
+                <p class="text-gray-700 mb-4">Authenticate a user with their credentials.</p>
+                <h4 class="font-semibold text-gray-800">Endpoint:</h4>
+                <code class="block bg-gray-200 text-gray-800 p-2 rounded-md">POST /accounts/login</code>
+
+                <h4 class="font-semibold text-gray-800">Request Body:</h4>
+                <pre class="bg-gray-200 p-2 rounded-md">
+{
+    "email": "string",
+    "password": "string"
+}
+                </pre>
+
+                <h4 class="font-semibold text-gray-800">Response:</h4>
+                <pre class="bg-gray-200 p-2 rounded-md">
+{
+    "message": "Login successful",
+    "token": "string"
+}
+                </pre>
+
+                <h4 class="font-semibold text-gray-800">Example Code Snippet:</h4>
+                <pre class="bg-gray-200 p-2 rounded-md">
+fetch('https://api.yourservice.com/v1/accounts/login', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        email: 'user@example.com',
+        password: 'securePassword123'
+    })
+})
+.then(response => response.json())
+.then(data => console.log(data));
+                </pre>
+            </div>
+
+            <!-- Add more endpoints as needed -->
+
+            <div class="bg-slate-800 p-6 mt-10 rounded-md">
+                <h2 class="text-2xl font-bold text-white mb-4">Contributing</h2>
+                <p class="text-white mb-4">We welcome contributions to improve the API documentation. Please check our
+                    <a href="https://github.com/ethan-korl/authuiservice" class="text-blue-400 underline">GitHub
+                        repository</a> for more details.
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="/javascripts/index.js"></script>
+</body>
+
+</html>

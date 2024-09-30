@@ -8,9 +8,11 @@ const {
 const crypto = require("crypto");
 const { SendEmail } = require("../configs/email");
 const { generateApiKey } = require("../utils/utils");
+const { ProjectRepository } = require("../repository/projects");
 
 const user_repo = new UserRepository();
 const api_key = new ApiKeyRepository();
+const project_repo = new ProjectRepository();
 
 module.exports.signUpHandler = async function (req, res) {
   res.render("signup");
@@ -21,6 +23,7 @@ module.exports.signUpPostHandler = async function (req, res) {
   if (!(username && email)) {
     return res.render("error_message", {
       message: "username and email required",
+      layout: false,
     });
   }
   try {
@@ -28,6 +31,7 @@ module.exports.signUpPostHandler = async function (req, res) {
     if (await user_repo.getUser(username)) {
       return res.render("error_message", {
         message: `Username ${username} taken`,
+        layout: false,
       });
     }
     // for testing
@@ -42,11 +46,18 @@ module.exports.signUpPostHandler = async function (req, res) {
       { username: username, otp: _otp }
     );
     await mail.send();
+    await project_repo.createProject(
+      `${String(username).toUpperCase()}.com Project (default)`,
+      user.user_id
+    );
     res.set("HX-Redirect", `/accounts/auth/${username}/`);
     return res.sendStatus(200);
   } catch (error) {
     console.error(error);
-    return res.render("error_message", { message: "Signup failed" });
+    return res.render("error_message", {
+      message: "Signup failed",
+      layout: false,
+    });
   }
 };
 
@@ -64,7 +75,10 @@ module.exports.handleLogin = async function (req, res) {
     return res.render("error_message", { message: "username required" });
   }
   if (!(await user_repo.getUser(username))) {
-    return res.render("error_message", { message: `user does not exists` });
+    return res.render("error_message", {
+      message: `user does not exists`,
+      layout: false,
+    });
   }
   const { _otp, _hash } = await makePassword();
   // for testing
@@ -91,10 +105,16 @@ module.exports.verifyOTP = async function (req, res) {
   const user = await user_repo.getUserForAuth(username);
   const isAuthenticated = await checkPassword(otp, user.password);
   if (!user) {
-    return res.render("error_message", { message: "user does not exist" });
+    return res.render("error_message", {
+      message: "user does not exist",
+      layout: false,
+    });
   }
   if (!isAuthenticated) {
-    return res.render("error_message", { message: "Invalid OTP" });
+    return res.render("error_message", {
+      message: "Invalid OTP",
+      layout: false,
+    });
   }
   const token = await tokenAuth(user);
   res.cookie("auth_token", token, { maxAge: 60 * 60000, httpOnly: true });
@@ -108,6 +128,7 @@ module.exports.checkUsername = async function (req, res) {
   if (await user_repo.getUser(username)) {
     return res.render("error_message", {
       message: `username ${username} taken`,
+      layout: false,
     });
   }
 };
