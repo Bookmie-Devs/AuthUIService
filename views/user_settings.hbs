@@ -1,7 +1,10 @@
 <div class="min-h-full"></div>
 <header class="bg-slate-100 shadow-md">
     <div class="flex justify-between max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{project.project_name}} Settings</h1>
+        <a href="/">
+            <img src="/images/logo.svg" class="h-8" alt="Authui Logo" />
+        </a>
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ user.username }} Settings</h1>
     </div>
 </header>
 
@@ -47,14 +50,36 @@
 
 
                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Api Keys
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Public Api Key
+                    </h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="setting-1" class="block text-sm mb-1 font-medium text-gray-700">Your Api
+                                Key</label>
+                            <div
+                                class="flex justify-between space-x-3 outline rounded-md outline-2 px-3 outline-gray-400 items-center">
+                                <input readonly type="text" id="callback-url" value="{{apiKey.api_secret_key}}"
+                                    class="mt-1 block w-full border-none px-3 py-2 shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    required />
+                                <a href="/accounts/get-api-Key/"
+                                    class="px-4 py-1 text-nowrap text-slate-500 bg-slate-200 text-center rounded-md">Copy</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Private Api Key
                     </h2>
                     <div class="space-y-4">
                         <div>
                             <label for="setting-1" class="block text-sm font-medium text-gray-700">Your Api
                                 Key</label>
                             <div class="flex justify-between space-x-3 items-center">
-                                <input readonly type="text" id="callback-url" value="{{apiKey.key}}"
+                                <input readonly type="text" id="callback-url" value="{{apiKey.private_key}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                                     required />
                                 <a href="/accounts/get-api-Key/"
@@ -63,12 +88,6 @@
                             </div>
 
                         </div>
-                        {{!-- <div>
-                            <label for="setting-2" class="block text-sm font-medium text-gray-700">Setting 2</label>
-                            <input type="text" id="setting-2" name="setting_2"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                                placeholder="Enter setting 2" />
-                        </div> --}}
                     </div>
                 </div>
             </form>

@@ -11,11 +11,10 @@ model user {
 }
 
 model api_key {
-    id           Int      @id @default(autoincrement())
-    user         user     @relation(fields: [user_id], references: [user_id])
-    user_id      Int      @unique
-    private_key  String?  @unique
-    public_key   String?  @unique
-    created_at   DateTime @default(now())
-    last_updated DateTime @default(now()) @updatedAt
+    id             Int      @id @default(autoincrement())
+    user           user     @relation(fields: [user_id], references: [user_id])
+    user_id        Int      @unique
+    api_secret_key String?  @unique
+    created_at     DateTime @default(now())
+    last_updated   DateTime @default(now()) @updatedAt
 }

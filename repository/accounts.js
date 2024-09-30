@@ -64,9 +64,12 @@ class ApiKeyRepository {
     this.model = prisma.api_key;
   }
 
-  async createKey(user_id, key) {
+  async createKey(user_id, apiSecretKey) {
     const apiKey = await this.model.create({
-      data: { user_id: user_id, key: key },
+      data: {
+        user_id: user_id,
+        api_secret_key: apiSecretKey,
+      },
       select: apiKeyDto,
     });
     return apiKey;
@@ -85,7 +88,7 @@ class ApiKeyRepository {
   async isKeyExist(key_value) {
     const key = await this.model.findUnique({
       where: {
-        key: key_value,
+        api_secret_key: key_value,
       },
       select: apiKeyDto,
     });

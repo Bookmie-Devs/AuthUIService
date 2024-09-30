@@ -1,4 +1,5 @@
 module.exports.userDto = {
+  user_id: true,
   email: true,
   username: true,
 };
@@ -12,7 +13,7 @@ module.exports.authDto = {
 
 module.exports.apiKeyDto = {
   id: true,
-  key: true,
+  api_secret_key: true,
   user_id: true,
   created_at: true,
   last_updated: true,

@@ -1,9 +1,13 @@
+const { ApiKeyRepository, UserRepository } = require("../repository/accounts");
 const { LoginFormRepository } = require("../repository/forms");
 const { ProjectRepository } = require("../repository/projects");
+const { encryptWithPublicKey } = require("../utils/utils");
 const { login } = require("./accounts");
 
 const project_repo = new ProjectRepository();
 const login_form_repo = new LoginFormRepository();
+const user_repo = new UserRepository();
+const api_key = new ApiKeyRepository();
 
 module.exports.createProject = async function (req, res) {
   const { project_name } = req.body;
@@ -19,6 +23,7 @@ module.exports.createProject = async function (req, res) {
       layout: false,
     });
   }
+
   const newProject = await project_repo.createProject(
     project_name.toUpperCase(),
     user_id
@@ -51,10 +56,19 @@ module.exports.deleteProject = async function (req, res) {
 
 module.exports.projectSettings = async function (req, res) {
   const project_id = req.params.project_id;
+  const username = req.user.username;
+  const user = await user_repo.getUser(username);
+  const apiKey = await api_key.getKey(user.user_id);
   const project = await project_repo.getProject(project_id);
+
   res.render("project_settings", {
     project,
-    loginScript: `<script src="https://${req.hostname}/client/23/login/"></script>`,
+    loginScript: `<script src="https://${
+      req.hostname
+    }/client/${encryptWithPublicKey(
+      apiKey.public_key,
+      project.id.toString()
+    )}/login/"></script>`,
   });
 };
 

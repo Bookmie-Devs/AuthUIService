@@ -1,7 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const { v4: uuid4 } = require("uuid");
-
+const crypto = require("crypto");
+const algorithm = "aes-256-cbc";
 const emailTemplates = path.join(__dirname, "email_templates");
 const logs = path.join(path.dirname(path.join(__dirname)), "_logs");
 
@@ -31,7 +32,7 @@ module.exports.writeLogsToFile = function (file, data) {
 
 module.exports.generateApiKey = function () {
   const key = uuid4();
-  return key;
+  return key.replace(/-/g, "");
 };
 
 module.exports.generatePublicPrivateKeys = function (params) {
@@ -50,6 +51,14 @@ module.exports.generatePublicPrivateKeys = function (params) {
   });
   return { publicKey, privateKey };
 };
+
+function encryptWithPublicKey(publicKey, message) {
+  const bufferMessage = Buffer.from(message, "utf8");
+
+  return crypto.publicEncrypt(publicKey, bufferMessage);
+}
+
+module.exports.encryptWithPublicKey = encryptWithPublicKey;
 
 module.exports.extractUsername = function (email) {
   const username = String(email).split("@")[0];
@@ -71,4 +80,14 @@ module.exports.cleanHtml = function (content) {
     .replace(/\s+/g, " ");
 
   return cleaned.trim();
+};
+
+module.exports.encrypt = function (text) {
+  const cipher = crypto.createCipheriv("aes-256-gcm", key, iv);
+  let encrypted = cipher.update(text, "utf8", "hex");
+  encrypted += cipher.final("hex");
+  //   const tag = cipher.getAuthTag();
+  return {
+    encryptedData: encrypted,
+  };
 };

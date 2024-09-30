@@ -11,6 +11,7 @@ const {
   logout,
   getApiKey,
   userSettings,
+  userVerification,
 } = require("../handlers/accounts");
 const {
   alreadyLogin,
@@ -30,6 +31,9 @@ router.post("/login", handleLogin);
 router.get("/auth/:username/", getVerified);
 
 router.post("/auth/", verifyOTP);
+
+// for user first verification
+router.all("/auth-user-verification/:username/", userVerification);
 
 router.post("/check-username/", checkUsername);
 

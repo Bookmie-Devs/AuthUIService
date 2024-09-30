@@ -7,7 +7,7 @@ const {
 } = require("../authentication/auth_backend");
 const crypto = require("crypto");
 const { SendEmail } = require("../configs/email");
-const { generateApiKey } = require("../utils/utils");
+const { generateApiKey, generatePublicPrivateKeys } = require("../utils/utils");
 const { ProjectRepository } = require("../repository/projects");
 
 const user_repo = new UserRepository();
@@ -46,11 +46,7 @@ module.exports.signUpPostHandler = async function (req, res) {
       { username: username, otp: _otp }
     );
     await mail.send();
-    await project_repo.createProject(
-      `${String(username).toUpperCase()}.com Project (default)`,
-      user.user_id
-    );
-    res.set("HX-Redirect", `/accounts/auth/${username}/`);
+    res.set("HX-Redirect", `/accounts/auth-user-verification/${username}/`);
     return res.sendStatus(200);
   } catch (error) {
     console.error(error);
@@ -122,6 +118,44 @@ module.exports.verifyOTP = async function (req, res) {
   return res.sendStatus(200);
 };
 
+module.exports.userVerification = async function (req, res) {
+  if (req.method === "POST") {
+    const { username, otp } = req.body;
+    const user = await user_repo.getUserForAuth(username);
+    const isAuthenticated = await checkPassword(otp, user.password);
+    if (!user) {
+      return res.render("error_message", {
+        message: "user does not exist",
+        layout: false,
+      });
+    }
+    if (!isAuthenticated) {
+      return res.render("error_message", {
+        message: "Invalid OTP",
+        layout: false,
+      });
+    }
+    await project_repo.createProject(
+      `${String(username).toUpperCase()}.com Project (default)`,
+      user.user_id
+    );
+    let key = generateApiKey();
+
+    while (await api_key.isKeyExist(key)) {
+      // if key exist assign a new key
+      key = generateApiKey();
+    }
+
+    await api_key.createKey(user.user_id, key);
+    const token = await tokenAuth(user);
+    res.cookie("auth_token", token, { maxAge: 60 * 60000, httpOnly: true });
+    res.set("HX-Redirect", `/dashboard/`);
+    return res.sendStatus(200);
+  }
+  const username = req.params.username;
+  return res.render("user_first_verification", { username });
+};
+
 module.exports.checkUsername = async function (req, res) {
   // check for username availability in real time
   const { username } = req.body;
@@ -135,9 +169,11 @@ module.exports.checkUsername = async function (req, res) {
 
 module.exports.userSettings = async function (req, res) {
   const username = req.user.username;
-  const user = user_repo.getUser(username);
+  const user = await user_repo.getUser(username);
   const apiKey = await api_key.getKey(user.user_id);
   console.log(apiKey);
+  console.log(user);
+
   return res.render("user_settings", { user, apiKey });
 };
 
