@@ -2,9 +2,16 @@ const fs = require("fs");
 const path = require("path");
 const { v4: uuid4 } = require("uuid");
 const crypto = require("crypto");
+const { ENCRYPTION_IV, ENCRYPTION_KEY } = require("../configs/contants");
 const algorithm = "aes-256-cbc";
 const emailTemplates = path.join(__dirname, "email_templates");
 const logs = path.join(path.dirname(path.join(__dirname)), "_logs");
+const htmlFiles = path.join(
+  path.dirname(path.join(__dirname)),
+  "public",
+  "media",
+  "html_files"
+);
 
 module.exports.renderWithContext = function (template, context = {}) {
   try {
@@ -18,6 +25,38 @@ module.exports.renderWithContext = function (template, context = {}) {
     console.log(error);
     return null;
   }
+};
+
+module.exports.extractUsername = function (email) {
+  const username = String(email).split("@")[0];
+  return username;
+};
+
+module.exports.localMediaUrl = function (req, filePath) {
+  const filePathArray = String(filePath).split("/");
+  // const host = req.hostname;
+  return `/${filePathArray[1]}/${filePathArray[2]}`;
+};
+
+module.exports.cleanHtml = function (content) {
+  let cleaned = content
+    .replace(/^\s*'/, "")
+    .replace(/'\s*}\s*$/, "")
+    .replace(/' \+ /g, "")
+    .replace(/\\r\\n/g, "")
+    .replace(/\s+/g, " ");
+
+  return cleaned.trim();
+};
+
+module.exports.encrypt = function (text) {
+  const cipher = crypto.createCipheriv("aes-256-gcm", key, iv);
+  let encrypted = cipher.update(text, "utf8", "hex");
+  encrypted += cipher.final("hex");
+  //   const tag = cipher.getAuthTag();
+  return {
+    encryptedData: encrypted,
+  };
 };
 
 module.exports.writeLogsToFile = function (file, data) {
@@ -35,30 +74,16 @@ module.exports.generateApiKey = function () {
   return key.replace(/-/g, "");
 };
 
-module.exports.generatePublicPrivateKeys = function (params) {
-  const { publicKey, privateKey } = crypto.generateKeyPairSync("rsa", {
-    modulusLength: 1000,
-    publicKeyEncoding: {
-      type: "spki",
-      format: "pem",
-    },
-    privateKeyEncoding: {
-      type: "pkcs8",
-      format: "pem",
-      cipher: "aes-256-cbc",
-      passphrase: "top secret",
-    },
-  });
-  return { publicKey, privateKey };
+module.exports.encrypt = (text) => {
+  let cipher = crypto.createCipheriv(
+    "aes-256-cbc",
+    Buffer.from(String(ENCRYPTION_KEY)),
+    String(ENCRYPTION_IV)
+  );
+  let encrypted = cipher.update(text);
+  encrypted = Buffer.concat([encrypted, cipher.final()]);
+  return { encryptedData: encrypted.toString("hex") };
 };
-
-function encryptWithPublicKey(publicKey, message) {
-  const bufferMessage = Buffer.from(message, "utf8");
-
-  return crypto.publicEncrypt(publicKey, bufferMessage);
-}
-
-module.exports.encryptWithPublicKey = encryptWithPublicKey;
 
 module.exports.extractUsername = function (email) {
   const username = String(email).split("@")[0];
@@ -69,6 +94,16 @@ module.exports.localMediaUrl = function (req, filePath) {
   const filePathArray = String(filePath).split("/");
   // const host = req.hostname;
   return `/${filePathArray[1]}/${filePathArray[2]}`;
+};
+
+module.exports.readHtmlFile = async function (fileName) {
+  const file = htmlFiles + fileName;
+  let content;
+  fs.readFile(file, "utf8", (err, data) => {
+    if (err) throw err;
+    content = data;
+  });
+  return content;
 };
 
 module.exports.cleanHtml = function (content) {

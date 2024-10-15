@@ -11,3 +11,7 @@ module.exports.API_KEY = process.env.API_KEY;
 module.exports.API_SECRET = process.env.API_KEY;
 
 module.exports.CLOUD_NAME = process.env.CLOUD_NAME;
+
+module.exports.ENCRYPTION_IV = process.env.ENCRYPTION_IV;
+
+module.exports.ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;

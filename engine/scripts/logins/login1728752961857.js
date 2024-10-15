@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("modal");
+  const btn = document.getElementById("kolo");
+  //   const span = document.getElementById("close");
+  const fromDiv = document.getElementById("form-div");
+
+  btn.onclick = () => {
+    fromDiv.innerHTML = `<!DOCTYPE html>
+  <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="http://127.0.0.1:3000/client/23/login/"></script>
   </head>
   <body>
-    <div id="form-div"></div>
-    <button onclick="" id="kolo">Hello me</button>
-
     <div
       id="modal"
       style="
@@ -60,14 +62,39 @@
             AuthUi Service
           </a>
         </h3>
-        <form id="myForm">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required />
+        <form id="auth-ui-form" method="POST" action="127.0.0.1:8000/login/">
           <label for="email">Email:</label>
           <input type="email" id="email" name="email" required />
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
           <button type="submit">Submit</button>
         </form>
       </div>
     </div>
   </body>
-</html>
+</html>`;
+
+    document.getElementById("auth-ui-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const form = new FormData(e.target);
+      console.log(form);
+      alert("submitted");
+    });
+  };
+
+  //   span.onclick = () => {
+  //     modal.style.display = "none";
+  //   };
+
+  //   document.getElementById("close").onclick = (event) => {
+  //     console.log("sksk");
+  //   };
+
+  //   document.getElementById("myForm").onsubmit = (event) => {
+  //     event.preventDefault();
+  //     const name = document.getElementById("name").value;
+  //     const email = document.getElementById("email").value;
+  //     alert(`Submitted!\nName: ${name}\nEmail: ${email}`);
+  //     modal.style.display = "none"; // Close the modal
+  //   };
+});

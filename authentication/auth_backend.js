@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { UserRepository } = require("../repository/accounts");
-const { SALT_ROUNDS, SECRET_KEY } = require("../configs/env");
+const { SALT_ROUNDS, SECRET_KEY } = require("../configs/contants");
 
 const user_repo = new UserRepository();
 

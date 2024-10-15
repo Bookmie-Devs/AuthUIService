@@ -36,13 +36,13 @@ class LoginFormRepository {
     return parsedForms;
   }
 
-  async addForm(title, description, preview_image, file_content) {
+  async addForm(title, description, preview_image, script) {
     return await this.model.create({
       data: {
         title: title,
         description: description,
         preview_image: preview_image,
-        file_content: file_content,
+        script: script,
       },
     });
   }

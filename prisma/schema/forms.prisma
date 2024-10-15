@@ -2,7 +2,7 @@ model login_form {
     id            Int       @id @default(autoincrement())
     title         String?
     description   String?
-    file_content  String?
+    script        String?
     preview_image String?
     project       project[]
 }
@@ -11,7 +11,7 @@ model signup_form {
     id            Int       @id @default(autoincrement())
     title         String?
     description   String?
-    file_content  String?
+    script        String?
     preview_image String?
     project       project[]
 }

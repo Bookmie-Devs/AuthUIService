@@ -58,16 +58,12 @@ module.exports.projectSettings = async function (req, res) {
   const project_id = req.params.project_id;
   const username = req.user.username;
   const user = await user_repo.getUser(username);
-  const apiKey = await api_key.getKey(user.user_id);
+  // const apiKey = await api_key.getKey(user.user_id);
   const project = await project_repo.getProject(project_id);
 
   res.render("project_settings", {
     project,
-    loginScript: `<script src="https://${
-      req.hostname
-    }/client/${encryptWithPublicKey(
-      apiKey.public_key,
-      project.id.toString()
+    loginScript: `<script src="https://${req.hostname}/client/
     )}/login/"></script>`,
   });
 };
