@@ -11,6 +11,7 @@ const dashboardRouter = require("./routes/dashboard");
 const projectRouter = require("./routes/projects");
 const apis = require("./engine/apis/routes/apiRoutes");
 const formRouter = require("./routes/forms");
+// const { admin, adminRouter } = require("./src/admin/admin");
 
 var app = express();
 
@@ -23,6 +24,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+// admin section
+
+// app.use(admin.options.rootPath, adminRouter);
+
+// console.log(admin.options.rootPath);
 
 app.use("/", indexRouter);
 app.use("/accounts", accountsRouter);
