@@ -3,9 +3,8 @@ const { loginSchema } = require("../api_schema/schema");
 
 module.exports.loginApi = async (req, res) => {
   const schema = loginSchema;
-  const { email, password, formId } = req.body;
+  const { email, password } = req.body;
   const { projectId } = req.params;
-  const apiPublicKey = req.headers["public_auth_key"];
   const user = await project_user.getUser(email);
 
   const { err, value } = schema.validate(req.body);

@@ -5,7 +5,10 @@ const crypto = require("crypto");
 const { ENCRYPTION_IV, ENCRYPTION_KEY } = require("../configs/contants");
 const algorithm = "aes-256-cbc";
 const emailTemplates = path.join(__dirname, "email_templates");
-const logs = path.join(path.dirname(path.join(__dirname)), "_logs");
+const logs = path.join(
+  path.dirname(path.dirname(path.join(__dirname))),
+  "_logs"
+);
 const htmlFiles = path.join(
   path.dirname(path.join(__dirname)),
   "public",
@@ -74,16 +77,7 @@ module.exports.generateApiKey = function () {
   return key.replace(/-/g, "");
 };
 
-module.exports.encrypt = (text) => {
-  let cipher = crypto.createCipheriv(
-    "aes-256-cbc",
-    Buffer.from(String(ENCRYPTION_KEY)),
-    String(ENCRYPTION_IV)
-  );
-  let encrypted = cipher.update(text);
-  encrypted = Buffer.concat([encrypted, cipher.final()]);
-  return { encryptedData: encrypted.toString("hex") };
-};
+// module.exports.encrypt = (project_uuid) =>
 
 module.exports.extractUsername = function (email) {
   const username = String(email).split("@")[0];

@@ -1,52 +1,211 @@
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("modal");
   const btn = document.getElementById("kolo");
-  //   const span = document.getElementById("close");
   const fromDiv = document.getElementById("form-div");
 
   btn.onclick = () => {
-    fromDiv.innerHTML = `<!DOCTYPE html>
-  <html lang="en">
+    fromDiv.innerHTML = `
+    <!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* Modal Background */
+      .modal-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3); /* Slightly darker background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      /* Modal Content */
+      .modal-content {
+        background-color: white;
+        width: 100%;
+        max-width: 400px; /* max-width for better readability */
+        padding: 32px; /* Added more padding for breathing space */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Stronger shadow for depth */
+        border-radius: 12px; /* Rounded corners */
+        font-family: "Arial", sans-serif;
+      }
+
+      /* Header */
+      .modal-content h2 {
+        text-align: center;
+        font-size: 24px; /* Larger heading */
+        margin-bottom: 24px; /* Spacing below header */
+        color: #333; /* Darker text color */
+      }
+
+      /* Form Label and Input Styles */
+      .form-label {
+        font-size: 14px; /* Consistent font size */
+        font-weight: 600; /* Bold font weight for clarity */
+        color: #333; /* Dark text for visibility */
+        margin-bottom: 6px; /* Reduced margin for better spacing */
+        display: block;
+      }
+
+      .form-input {
+        width: 94%;
+        padding: 12px 16px; /* More padding for better touch targets */
+        border-radius: 8px; /* Slightly rounded corners for input fields */
+        border: 1px solid #d1d5db; /* Soft border */
+        color: #333; /* Dark text for readability */
+        font-size: 14px;
+        margin-bottom: 20px; /* More space between inputs */
+        transition: border 0.3s ease-in-out;
+      }
+
+      .form-input:focus {
+        border-color: #3498db; /* Blue border on focus */
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2); /* Subtle focus shadow */
+      }
+
+      .form-input-error {
+        border-color: #e74c3c; /* Red border for error states */
+        background-color: #f9d6d6; /* Light red background for error state */
+      }
+
+      /* Error message text */
+      .error-message {
+        color: #e74c3c; /* Red error text */
+        font-size: 12px; /* Smaller font for error messages */
+        font-style: italic; /* Italicize error message */
+        margin-top: 6px;
+      }
+
+      /* Submit Button */
+      .submit-btn {
+        background-color: #131630; /* Professional blue color */
+        color: white;
+        font-weight: 600;
+        border-radius: 8px; /* Rounded button corners */
+        border: none;
+        padding: 12px 0; /* Vertical padding */
+        width: 100%; /* Full width button */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-size: 16px; /* Larger button text */
+      }
+
+      .submit-btn:hover {
+        background-color: #072661; /* Darker blue on hover */
+      }
+
+      /* Footer Link */
+      .forgot-password {
+        font-size: 12px; /* Slightly smaller */
+        color: #3498db; /* Professional blue */
+        font-weight: 600;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        margin-top: 12px; /* Space above the link */
+      }
+
+      .forgot-password:hover {
+        color: #2980b9; /* Slightly darker blue on hover */
+      }
+
+      /* Footer Text */
+      .footer-text {
+        text-align: center;
+        color: #777; /* Lighter gray for footer */
+        font-size: 12px;
+        margin-top: 24px; /* Space between form and footer */
+      }
+    </style>
   </head>
   <body>
-<!-- Modal Background -->
-<div class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-  <!-- Modal Content -->
-  <div class="w-full max-w-xs bg-white shadow-md rounded px-8 pt-6 pb-8">
-    <form id="auth-ui-form" action="" method="POST">
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-          Email
-        </label>
-        <input name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="email" placeholder="Email">
+    <!-- Modal Background -->
+    <div class="modal-background">
+      <!-- Modal Content -->
+      <div class="modal-content">
+        <h2>Sign In</h2>
+        <form
+          id="auth-ui-form"
+          action=""
+          method="POST"
+          onsubmit="return validateForm()"
+        >
+          <div class="form-group">
+            <label for="username" class="form-label">Email</label>
+            <input
+              name="email"
+              id="username"
+              type="email"
+              placeholder="Enter your email"
+              class="form-input"
+            />
+            <p id="email-error" class="error-message" style="display: none">
+              Please enter a valid email address.
+            </p>
+          </div>
+          <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input
+              name="password"
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+              class="form-input"
+            />
+            <!-- <p class="error-message">Please choose a valid password.</p> -->
+          </div>
+          <button type="submit" class="submit-btn">Sign In</button>
+        </form>
+        <a class="forgot-password" href="#">Forgot your password?</a>
+        <p class="footer-text">&copy;2024 AuthUi Corp. All rights reserved.</p>
       </div>
-      <div class="mb-6">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-          Password
-        </label>
-        <input name="password" class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************">
-        <p class="text-red-500 text-xs italic">Please choose a password.</p>
-      </div>
-      <div class="flex items-center justify-between">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-          Sign In
-        </button>
-        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-          Forgot Password?
-        </a>
-      </div>
-    </form>
-    <p class="text-center text-gray-500 text-xs">
-      &copy;2020 Acme Corp. All rights reserved.
-    </p>
-  </div>
-</div>
+    </div>
 
+    <script>
+      function validateForm() {
+        // Clear previous errors
+        const emailInput = document.getElementById("username");
+        const emailError = document.getElementById("email-error");
+        const passwordInput = document.getElementById("password");
+
+        let isValid = true;
+
+        // Regular expression for a simple email validation
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+        // Email Validation
+        if (!emailPattern.test(emailInput.value)) {
+          emailError.style.display = "block"; // Show error message
+          emailInput.classList.add("form-input-error"); // Add error styling
+          isValid = false;
+        } else {
+          emailError.style.display = "none"; // Hide error message if valid
+          emailInput.classList.remove("form-input-error"); // Remove error styling
+        }
+
+        // Password Validation (example - ensure not empty)
+        if (passwordInput.value.trim() === "") {
+          passwordInput.classList.add("form-input-error");
+          isValid = false;
+        } else {
+          passwordInput.classList.remove("form-input-error");
+        }
+
+        return isValid; // If form is valid, allow form submission
+      }
+    </script>
   </body>
-</html>`;
+</html>
+
+
+    `;
 
     document.getElementById("auth-ui-form").addEventListener("submit", (e) => {
       e.preventDefault();

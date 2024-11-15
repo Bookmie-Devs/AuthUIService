@@ -12,8 +12,8 @@ const project_user_repo = new ProjectUserRepository();
 
 module.exports.signUpApi = async function (req, res) {
   const schema = signupSchema;
-  const project_id = parseInt(req.params.project_id);
-  console.log(project_id);
+  const projectId = parseInt(req.params.projectId);
+  console.log(projectId);
   const { email, password } = req.body;
   const { err, value } = schema.validate(req.body);
   console.log("working");

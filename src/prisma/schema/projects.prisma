@@ -1,8 +1,11 @@
 model project {
-    id           Int    @id @default(autoincrement())
-    project_name String
-    user         user   @relation(fields: [user_id], references: [user_id])
-    user_id      Int
+    id                   Int     @id @default(autoincrement())
+    project_uuid         String? @unique
+    project_name         String
+    user                 user    @relation(fields: [user_id], references: [user_id])
+    user_id              Int
+    redirect_to_callback Boolean @default(false)
+    // allowed_hostnames String[]
 
     signup_form     signup_form? @relation(fields: [signup_form_id], references: [id])
     signup_form_id  Int?         @unique
@@ -12,11 +15,19 @@ model project {
     login_form_id  Int?        @unique
     login_callback String?
 
-    active        Boolean        @default(false)
-    created_at    DateTime       @default(now())
-    last_updated  DateTime       @default(now()) @updatedAt
-    login_data    login_data[]
-    project_users project_user[]
+    active            Boolean             @default(false)
+    created_at        DateTime            @default(now())
+    last_updated      DateTime            @default(now()) @updatedAt
+    login_data        login_data[]
+    project_users     project_user[]
+    allowed_hostnames allowed_hostnames[]
+}
+
+model allowed_hostnames {
+    id         Int     @id @default(autoincrement())
+    hostname   String?
+    project    project @relation(fields: [project_id], references: [id])
+    project_id Int
 }
 
 model email_verification_codes {

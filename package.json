@@ -2,6 +2,9 @@
   "name": "authuiservice",
   "version": "0.0.0",
   "private": true,
+  "prisma":{
+    "schema":"./src/prisma/schema/"
+  },
   "scripts": {
     "test": "jest --watchAll",
     "start": "node ./bin/www",

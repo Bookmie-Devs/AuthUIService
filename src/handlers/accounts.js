@@ -9,6 +9,7 @@ const crypto = require("crypto");
 const { SendEmail } = require("../configs/email");
 const { generateApiKey, generatePublicPrivateKeys } = require("../utils/utils");
 const { ProjectRepository } = require("../repository/projects");
+const { writeFormIntoLoginScript } = require("../engine/utils/utils");
 
 const user_repo = new UserRepository();
 const api_key = new ApiKeyRepository();
@@ -119,6 +120,7 @@ module.exports.verifyOTP = async function (req, res) {
 };
 
 module.exports.userVerification = async function (req, res) {
+  // for first signups so we can create a default project for them
   if (req.method === "POST") {
     const { username, otp } = req.body;
     const user = await user_repo.getUserForAuth(username);
@@ -135,10 +137,13 @@ module.exports.userVerification = async function (req, res) {
         layout: false,
       });
     }
-    await project_repo.createProject(
+    const project = await project_repo.createProject(
       `${String(username).toUpperCase()}.com Project (default)`,
       user.user_id
     );
+    //  write login script for  project
+    await writeFormIntoLoginScript(project.project_uuid);
+
     let key = generateApiKey();
 
     while (await api_key.isKeyExist(key)) {

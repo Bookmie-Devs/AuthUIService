@@ -58,84 +58,33 @@ module.exports.generateToken = async function (user, apiPrivateKey) {
 
 module.exports.writeLoginLog = async function (params) {};
 
-const test_form = `<!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    <div
-      id="modal"
-      style="
-        display: inline;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        border-width: 20px;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-      "
-    >
-      <div
-        style="
-          background-color: rgb(224, 224, 224);
-          margin: 15% auto;
-          border-radius: 20px;
-          padding: 10px;
-          border: 1px solid #888;
-          width: 80%;
-        "
-      >
-        <button
-          onclick="document.getElementById('form-div').style.display='none'"
-          id="close"
-          style="
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-          "
-        >
-          &times;
-        </button>
-        <h3
-          style="
-            text-align: center;
-            font-family: monospace;
-            text-decoration: underline;
-          "
-        >
-          <a style="text-decoration: none; color: #141727" href="">
-            AuthUi Service
-          </a>
-        </h3>
-        <form id="auth-ui-form" method="POST" action="127.0.0.1:8000/login/">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required />
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required />
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    </div>
-  </body>
-</html>`;
-
-module.exports.writeFormIntoLoginScript = async function (form_content) {
+module.exports.writeFormIntoLoginScript = async function (project_uuid) {
   // create new js file
-  const uniqueName = "login" + Date.now() + ".js";
+  const uniqueName = "login" + project_uuid + ".js";
   // fetch content from base script;
   const content = fs.readFileSync(scripts + "base_login_script.js", "utf8");
 
   // write into new js file with html form
   const filePath = scripts + "logins/" + uniqueName;
-  const jsScript = content.replace("{{context}}", test_form);
+  const jsScript = content.replace("{{context}}", "");
+  fs.writeFileSync(filePath, jsScript);
+
+  return { uniqueName, filePath };
+};
+
+module.exports.writeFormIntoSignupScript = async function (project_uuid) {
+  // create new js file
+  const uniqueName = "signup" + project_uuid + ".js";
+  // fetch content from base script;
+  const content = fs.readFileSync(scripts + "base_signup_script.js", "utf8");
+
+  const formConext = { action: "" };
+  // write into new js file with html form
+  const filePath = scripts + "singups/" + uniqueName;
+  const jsScript = content.replace("{{context}}", "");
+  for (var key in formConext) {
+    jsScript.replace(`{{${key}}}`, formConext["key"]);
+  }
   fs.writeFileSync(filePath, jsScript);
 
   return { uniqueName, filePath };

@@ -1,5 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const { listProjectsDto } = require("../dtos/projects");
+const { v4: uuidv4 } = require("uuid");
 const prisma = new PrismaClient();
 
 class ProjectRepository {
@@ -8,8 +9,9 @@ class ProjectRepository {
   }
 
   async createProject(project_name, user_id) {
+    const uuid = uuidv4();
     const project = await this.model.create({
-      data: { project_name, user_id },
+      data: { project_uuid: uuid, project_name, user_id },
     });
     return project;
   }
@@ -75,6 +77,8 @@ class ProjectRepository {
     return project;
   }
 
+  async getAllowedHost(projectId) {}
+
   async changeProjectStatus(project_id, status) {
     const project = await this.model.update({
       where: {
@@ -89,6 +93,14 @@ class ProjectRepository {
 }
 
 module.exports.ProjectRepository = ProjectRepository;
+
+class AllowedHostsRepo {
+  constructor(parameters) {
+    // this.model = prisma
+  }
+
+  async addAllowedHost(projectId) {}
+}
 
 class EmailVerificationRepository {
   constructor() {
