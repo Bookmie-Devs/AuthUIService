@@ -1,3 +1,7 @@
+const {
+  writeFormIntoLoginScript,
+  writeFormIntoSignupScript,
+} = require("../engine/utils/utils");
 const { ApiKeyRepository, UserRepository } = require("../repository/accounts");
 const { LoginFormRepository } = require("../repository/forms");
 const { ProjectRepository } = require("../repository/projects");
@@ -33,6 +37,7 @@ module.exports.createProject = async function (req, res) {
   }
 
   await writeFormIntoLoginScript(newProject.project_uuid);
+  await writeFormIntoSignupScript(newProject.project_uuid);
   res.set("HX-Redirect", `/projects/project-settings/${newProject.id}/`);
   return res.sendStatus(200);
   // return res.render("info_message", { "message": `Project Created` })
@@ -65,8 +70,8 @@ module.exports.projectSettings = async function (req, res) {
 
   res.render("project_settings", {
     project,
-    loginScript: `<script src="https://${req.hostname}/client/
-    )}/login/"></script>`,
+    loginScript: `<script src="https://${req.hostname}/client/${project.project_uuid}/login/"></script>`,
+    signupScript: `<script src="https://${req.hostname}/client/${project.project_uuid}/signup/"></script>`,
   });
 };
 

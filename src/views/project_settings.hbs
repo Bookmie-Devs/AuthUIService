@@ -14,6 +14,43 @@
                 <form action="/projects/update-settings/" method="post" class="space-y-6">
 
 
+
+                    <div class="rounded-lg bg-white ">
+                        <p class="text-start pl-6 text-lg pt-3">Scripts</p>
+                        <div class=" p-6 ">
+                            <div class="w-full mr-4">
+                                <h2 class="text-xl text-gray-900 mb-4">Generate Signup script link</h2>
+                                <div class="flex justify-between space-x-3 items-center">
+                                    <input type="url" id="callback-url" name="callback_url"
+                                        class="mt-1 block w-full  text-lg bg-slate-300 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                        value="{{ loginScript }}" required disabled />
+                                    <a href="/projects/signup-forms/{{project.id}}/"
+                                        class="px-4 py-2 shadow-md text-nowrap text-white shadow-slate-400 bg-slate-900 text-center rounded-md">Copy
+                                        Script</a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class=" p-6 ">
+                            <div class="w-full mr-4">
+                                <h2 class="text-xl text-gray-900 mb-4">Generate Signup script link</h2>
+                                <div class="flex justify-between space-x-3 items-center">
+                                    <input type="url" id="callback-url" name="callback_url"
+                                        class="mt-1 block w-full  text-lg bg-slate-300 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                        value="{{ signupScript }}" required disabled />
+                                    <a href="/projects/signup-forms/{{project.id}}/"
+                                        class="px-4 py-2 shadow-md text-nowrap text-white shadow-slate-400 bg-slate-900 text-center rounded-md">Copy
+                                        Script</a>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <div class="w-full mr-4">
                             <h2 class="text-xl font-semibold text-gray-900 mb-4">Login
@@ -43,40 +80,6 @@
                                     Form</a>
                             </div>
 
-                        </div>
-                    </div>
-
-
-
-                    <div class="rounded-lg bg-white ">
-                        <p class="text-start pl-6 text-lg pt-3">Scripts</p>
-                        <div class=" p-6 ">
-                            <div class="w-full mr-4">
-                                <h2 class="text-xl text-gray-900 mb-4">Generate Signup script link</h2>
-                                <div class="flex justify-between space-x-3 items-center">
-                                    <input type="url" id="callback-url" name="callback_url"
-                                        class="mt-1 block w-full  text-lg bg-slate-300 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                                        value="{{ loginScript }}" required disabled />
-                                    <a href="/projects/signup-forms/{{project.id}}/"
-                                        class="px-4 py-2 shadow-md text-nowrap text-white shadow-slate-400 bg-slate-900 text-center rounded-md">Copy
-                                        Script</a>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class=" p-6">
-                            <div class="w-full mr-4">
-                                <h2 class="text-xl text-gray-900 mb-4">Generate Signup script link</h2>
-                                <div class="flex justify-between space-x-3 items-center">
-                                    <input type="url" id="callback-url" name="callback_url"
-                                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                                        placeholder="https://example.com/callback" required />
-                                    <a href="/projects/signup-forms/{{project.id}}/"
-                                        class="px-4 py-2 shadow-lg text-nowrap text-white shadow-slate-400 bg-slate-900 text-center rounded-md">Generate</a>
-                                </div>
-
-                            </div>
                         </div>
                     </div>
 

@@ -82,9 +82,9 @@ module.exports.writeFormIntoSignupScript = async function (project_uuid) {
   // write into new js file with html form
   const filePath = scripts + "singups/" + uniqueName;
   const jsScript = content.replace("{{context}}", "");
-  for (var key in formConext) {
+  /* for (var key in formConext) {
     jsScript.replace(`{{${key}}}`, formConext["key"]);
-  }
+  } */
   fs.writeFileSync(filePath, jsScript);
 
   return { uniqueName, filePath };

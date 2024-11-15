@@ -153,7 +153,7 @@
                                 Project name
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Requests
+                                Hostnames
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Status
@@ -174,8 +174,10 @@
                                 <a href="/projects/project-settings/{{this.id}}/"
                                     class="hover:underline">{{this.project_name}}</a>
                             </th>
-                            <td class="px-6 py-4 text-green-500">
-                                50
+                            <td class="px-6 py-4 text-blue-500">
+                                <a href="/projects/configure-allowed-hostnames/{{this.id}}/"
+                                    class="hover:outline-2 outline outline-1 px-3 py-1 rounded-md">Allowed Hosts</a>
+
                             </td>
                             <td class="px-6 py-4">
                                 {{#if active}}
