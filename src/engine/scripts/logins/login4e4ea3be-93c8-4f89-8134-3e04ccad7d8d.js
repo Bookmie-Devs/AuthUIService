@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <div class="modal-background">
       <!-- Modal Content -->
       <div class="modal-content">
-        <h2>Sign In</h2>
+        <h2>{{ projectName }} Sign In</h2>
         <form
           id="auth-ui-form"
           action=""

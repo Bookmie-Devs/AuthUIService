@@ -36,7 +36,10 @@ module.exports.createProject = async function (req, res) {
     return res.render("error_message", { message: `error occured` });
   }
 
-  await writeFormIntoLoginScript(newProject.project_uuid);
+  await writeFormIntoLoginScript(
+    newProject.project_uuid,
+    newProject.project_name
+  );
   await writeFormIntoSignupScript(newProject.project_uuid);
   res.set("HX-Redirect", `/projects/project-settings/${newProject.id}/`);
   return res.sendStatus(200);

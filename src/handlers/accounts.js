@@ -9,7 +9,10 @@ const crypto = require("crypto");
 const { SendEmail } = require("../configs/email");
 const { generateApiKey, generatePublicPrivateKeys } = require("../utils/utils");
 const { ProjectRepository } = require("../repository/projects");
-const { writeFormIntoLoginScript } = require("../engine/utils/utils");
+const {
+  writeFormIntoLoginScript,
+  writeFormIntoSignupScript,
+} = require("../engine/utils/utils");
 
 const user_repo = new UserRepository();
 const api_key = new ApiKeyRepository();
@@ -142,7 +145,11 @@ module.exports.userVerification = async function (req, res) {
       user.user_id
     );
     //  write login script for  project
-    await writeFormIntoLoginScript(project.project_uuid);
+    await writeFormIntoLoginScript(project.project_uuid, `${username} Project`);
+    await writeFormIntoSignupScript(
+      project.project_uuid,
+      `${username} Project`
+    );
 
     let key = generateApiKey();
 

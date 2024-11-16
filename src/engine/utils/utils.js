@@ -58,15 +58,24 @@ module.exports.generateToken = async function (user, apiPrivateKey) {
 
 module.exports.writeLoginLog = async function (params) {};
 
-module.exports.writeFormIntoLoginScript = async function (project_uuid) {
+module.exports.writeFormIntoLoginScript = async function (
+  project_uuid,
+  projectName
+) {
   // create new js file
   const uniqueName = "login" + project_uuid + ".js";
   // fetch content from base script;
   const content = fs.readFileSync(scripts + "base_login_script.js", "utf8");
 
+  const formConext = { action: "", projectName: projectName };
   // write into new js file with html form
   const filePath = scripts + "logins/" + uniqueName;
-  const jsScript = content.replace("{{context}}", "");
+  const jsScript = content;
+
+  for (var key in formConext) {
+    jsScript.replace(`{{${key}}}`, formConext[key]);
+  }
+
   fs.writeFileSync(filePath, jsScript);
 
   return { uniqueName, filePath };
@@ -80,11 +89,11 @@ module.exports.writeFormIntoSignupScript = async function (project_uuid) {
 
   const formConext = { action: "" };
   // write into new js file with html form
-  const filePath = scripts + "singups/" + uniqueName;
-  const jsScript = content.replace("{{context}}", "");
-  /* for (var key in formConext) {
+  const filePath = scripts + "signups/" + uniqueName;
+  const jsScript = content;
+  for (var key in formConext) {
     jsScript.replace(`{{${key}}}`, formConext["key"]);
-  } */
+  }
   fs.writeFileSync(filePath, jsScript);
 
   return { uniqueName, filePath };

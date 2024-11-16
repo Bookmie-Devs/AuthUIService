@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         font-weight: 600; /* Bold font weight for clarity */
         color: #333; /* Dark text for visibility */
         margin-bottom: 6px; /* Reduced margin for better spacing */
-        display: block;
+display: block;
       }
 
       .form-input {

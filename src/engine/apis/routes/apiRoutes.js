@@ -18,15 +18,15 @@ const loginPath = path.join(
 router.post("/:projectId/signup/", apiPublicKeyMiddleware, signUpApi);
 router.post("/:projectId/login/", apiPublicKeyMiddleware, loginApi);
 
-router.get("/:project_id/login/", (req, res) => {
-  console.log(loginPath);
-  // const htmlContent = readHtmlFile("");
-  return res.sendFile(loginPath + "login1728739713297.js");
-});
-
-router.get("/auth-ui-tailwind-css/", (req, res) => {
-  const snippet = `<script src="https://cdn.tailwindcss.com"></script>`;
-  return res.type("js").send(snippet);
+router.get("/:projectId/login/", (req, res) => {
+  try {
+    const { projectId } = req.params;
+    console.log(projectId);
+    const scriptFile = `login${projectId}.js`;
+    return res.sendFile(loginPath + scriptFile);
+  } catch (error) {
+    return res.status(404).setHeader(msg, "no scripts for this project id");
+  }
 });
 
 module.exports = router;
