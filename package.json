@@ -2,13 +2,13 @@
   "name": "authuiservice",
   "version": "0.0.0",
   "private": true,
-  "prisma":{
-    "schema":"./src/prisma/schema/"
+  "prisma": {
+    "schema": "./src/prisma/schema/"
   },
   "scripts": {
     "test": "jest --watchAll",
-    "start": "node ./bin/www",
-    "dev": "nodemon ./src/bin/www"
+    "start": "node ./_bin/init.js",
+    "dev": "nodemon ./src/_bin/init.js"
   },
   "dependencies": {
     "@prisma/client": "^5.19.1",
